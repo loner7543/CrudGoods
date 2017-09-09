@@ -1,1 +1,1 @@
-# SpringTemplateWar
+# CRUD Goods Application
