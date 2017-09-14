@@ -24,6 +24,7 @@ public class Buyer implements Serializable {
     @Column(name = "lastname")
     private String lastName;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")
     private Date birthDate;
 
@@ -32,6 +33,14 @@ public class Buyer implements Serializable {
 
     @Column(name = "livingaddress")
     private String livingAddress;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "buyerid")
+    private Discount discount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "saleid")
+    private Sale sale;
 
     public Buyer() {
     }

@@ -24,14 +24,20 @@ public class Seller implements Serializable {
     @Column(name = "lastname")
     private String lastName;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")
     private Date birthDate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "email")
     private String email;
 
     @Column(name = "deliveryaddress")
     private String deliveryAddress;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "saleid")
+    private Sale sale;
 
     public Seller() {
     }

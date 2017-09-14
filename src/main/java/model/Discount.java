@@ -3,6 +3,8 @@ package model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "discountsequence")
 @Entity
@@ -15,8 +17,11 @@ public class Discount implements Serializable {
     @Column(name = "id")
     private int id;
 
-    private Buyer buyer;
-    private Product product;
+    @OneToMany(mappedBy = "buyerid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Buyer.class)
+    private Set<Buyer> buyers = new HashSet<Buyer>();
+
+    @OneToMany(mappedBy = "productid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Product.class)
+    private Set<Product> products = new HashSet<Product>();
 
     @Column(name = "actingfrom")
     private Date actualFrom;
@@ -27,10 +32,10 @@ public class Discount implements Serializable {
     public Discount() {
     }
 
-    public Discount(int id, Buyer buyer, Product product, Date actualFrom, Date actualTo) {
+    public Discount(int id, Set<Buyer> buyers, Set<Product> products, Date actualFrom, Date actualTo) {
         this.id = id;
-        this.buyer = buyer;
-        this.product = product;
+        this.buyers = buyers;
+        this.products = products;
         this.actualFrom = actualFrom;
         this.actualTo = actualTo;
     }
@@ -43,20 +48,20 @@ public class Discount implements Serializable {
         this.id = id;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
+    public Set<Buyer> getBuyers() {
+        return buyers;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
+    public void setBuyers(Set<Buyer> buyers) {
+        this.buyers = buyers;
     }
 
-    public Product getProduct() {
-        return product;
+    public Set<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public Date getActualFrom() {

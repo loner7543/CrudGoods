@@ -22,6 +22,14 @@ public class Product implements Serializable{
     @Column(name = "unitname")
     private String unitName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "discountd")
+    private Discount discount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "saleid")// todo не точно
+    private Sale sale;
+
     public Product() {
     }
 
