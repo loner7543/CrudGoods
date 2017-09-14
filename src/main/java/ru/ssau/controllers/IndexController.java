@@ -21,4 +21,9 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView("welcome");
         return modelAndView;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/test")
+    public void testDb(){
+
+    }
 }
