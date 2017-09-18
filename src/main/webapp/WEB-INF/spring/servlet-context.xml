@@ -81,6 +81,10 @@
     <bean id="productService" class="service.ProductService">
     </bean>
 
+    <bean id="discountService" class="service.DiscountService">
+    </bean>
+
+
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>  &lt;!&ndash;enable @Transactional&ndash;&gt;-->
     <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
         <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->

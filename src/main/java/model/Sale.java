@@ -26,14 +26,6 @@ public class Sale implements Serializable {
     @Column(name = "deliverydare")
     private Date deliveryDate;
 
-    @OneToMany(mappedBy = "productid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Product.class)
-    private Set<Product> products = new HashSet<Product>();
-
-    @OneToMany(mappedBy = "buyerid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Buyer.class)
-    private Set<Buyer> buyers = new HashSet<Buyer>();
-
-    @OneToMany(mappedBy = "sellerid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Seller.class)
-    private Seller seller;
 
     @Column(name = "amountproduct")
     private int amountProduct;
@@ -41,13 +33,10 @@ public class Sale implements Serializable {
     public Sale() {
     }
 
-    public Sale(int id, Date orderDate, Date deliveryDate, Set<Product> products, Set<Buyer> buyers, Seller seller, int amountProduct) {
+    public Sale(int id, Date orderDate, Date deliveryDate, Set<Product> products, Set<Buyer> buyers, Set<Seller> sellers, int amountProduct) {
         this.id = id;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
-        this.products = products;
-        this.buyers = buyers;
-        this.seller = seller;
         this.amountProduct = amountProduct;
     }
 
@@ -75,29 +64,29 @@ public class Sale implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProduct(Set<Product> products) {
-        this.products = products;
-    }
-
-    public Set<Buyer> getBuyers() {
-        return buyers;
-    }
-
-    public void setBuyers(Set<Buyer> buyers) {
-        this.buyers = buyers;
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProduct(Set<Product> products) {
+//        this.products = products;
+//    }
+//
+//    public Set<Buyer> getBuyers() {
+//        return buyers;
+//    }
+//
+//    public void setBuyers(Set<Buyer> buyers) {
+//        this.buyers = buyers;
+//    }
+//
+//    public Set<Seller> getSeller() {
+//        return sellers;
+//    }
+//
+//    public void setSeller(Set<Seller> sellers) {
+//        this.sellers = sellers;
+//    }
 
     public int getAmountProduct() {
         return amountProduct;

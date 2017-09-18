@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "productsequence")
 @Entity
@@ -21,16 +23,19 @@ public class Product implements Serializable{
 
     @Column(name = "unitname")
     private String unitName;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+////    @JoinColumn(name = "discount_id")
+//    private Discount discount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "discountd")
-    private Discount discount;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "saleid")// todo не точно
-    private Sale sale;
 
     public Product() {
+    }
+
+    public Product(String name, int unitCoast, String unitName) {
+        this.name = name;
+        this.unitCoast = unitCoast;
+        this.unitName = unitName;
     }
 
     public Product(int id, String name, int unitCoast, String unitName) {
@@ -71,4 +76,13 @@ public class Product implements Serializable{
     public void setUnitName(String unitName) {
         this.unitName = unitName;
     }
+
+//    public Discount getDiscount() {
+//        return discount;
+//    }
+//
+//    public void setDiscount(Discount discount) {
+//        this.discount = discount;
+//    }
 }
+

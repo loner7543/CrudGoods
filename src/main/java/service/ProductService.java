@@ -32,4 +32,9 @@ public class ProductService {
         TypedQuery<Product> typedQuery = entityManager.createQuery(query, Product.class);
         return typedQuery.getResultList();
     }
+
+    @Transactional
+    public void saveProducr(Product product){
+        entityManager.persist(product);
+    }
 }

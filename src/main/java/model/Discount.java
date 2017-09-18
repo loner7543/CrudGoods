@@ -17,11 +17,8 @@ public class Discount implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @OneToMany(mappedBy = "buyerid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Buyer.class)
-    private Set<Buyer> buyers = new HashSet<Buyer>();
-
-    @OneToMany(mappedBy = "productid",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Product.class)
-    private Set<Product> products = new HashSet<Product>();
+//    @OneToMany(mappedBy="discount", cascade = CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Product.class)
+//    private Set<Product> products = new HashSet<Product>();
 
     @Column(name = "actingfrom")
     private Date actualFrom;
@@ -29,15 +26,10 @@ public class Discount implements Serializable {
     @Column(name = "actingto")
     private Date actualTo;
 
-    public Discount() {
-    }
+    @Column(name = "amountDiscount")
+    private int amountDiscount;
 
-    public Discount(int id, Set<Buyer> buyers, Set<Product> products, Date actualFrom, Date actualTo) {
-        this.id = id;
-        this.buyers = buyers;
-        this.products = products;
-        this.actualFrom = actualFrom;
-        this.actualTo = actualTo;
+    public Discount() {
     }
 
     public int getId() {
@@ -46,22 +38,6 @@ public class Discount implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Set<Buyer> getBuyers() {
-        return buyers;
-    }
-
-    public void setBuyers(Set<Buyer> buyers) {
-        this.buyers = buyers;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 
     public Date getActualFrom() {
@@ -78,5 +54,21 @@ public class Discount implements Serializable {
 
     public void setActualTo(Date actualTo) {
         this.actualTo = actualTo;
+    }
+
+//    public Set<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(Set<Product> products) {
+//        this.products = products;
+//    }
+
+    public int getAmountDiscount() {
+        return amountDiscount;
+    }
+
+    public void setAmountDiscount(int amountDiscount) {
+        this.amountDiscount = amountDiscount;
     }
 }
