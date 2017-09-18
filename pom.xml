@@ -11,7 +11,7 @@
 
     <properties>
         <spring.version>4.3.4.RELEASE</spring.version>
-        <hibernate.version>4.1.0.Final</hibernate.version>
+        <hibernate.version>4.3.0.Final</hibernate.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
     </properties>
 
@@ -114,11 +114,13 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -239,6 +241,26 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.8.Final</version>
+        </dependency>
+
+        <dependency>
+        <groupId>org.hibernate.common</groupId>
+        <artifactId>hibernate-commons-annotations</artifactId>
+        <version>5.0.1.Final</version>
+    </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.0-rc1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.1.Final</version>
         </dependency>
 
     </dependencies>
