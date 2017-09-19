@@ -3,6 +3,8 @@ package model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "buyersequence")
 @Entity
@@ -34,13 +36,12 @@ public class Buyer implements Serializable {
     @Column(name = "livingaddress")
     private String livingAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buyerid")
-    private Discount discount;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "saleid")
-    private Sale sale;
+//    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Discount.class)
+//    private Set<Discount> discounts = new HashSet<Discount>();
+//
+////    @ManyToOne(fetch = FetchType.LAZY)
+////    @JoinColumn(name = "saleid")
+//    private Sale sale;
 
     public Buyer() {
     }
@@ -110,4 +111,12 @@ public class Buyer implements Serializable {
     public void setLivingAddress(String livingAddress) {
         this.livingAddress = livingAddress;
     }
+
+//    public Set<Discount> getDiscounts() {
+//        return discounts;
+//    }
+//
+//    public void setDiscounts(Set<Discount> discounts) {
+//        this.discounts = discounts;
+//    }
 }

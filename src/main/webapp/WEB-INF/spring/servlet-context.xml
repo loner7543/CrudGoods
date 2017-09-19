@@ -5,14 +5,16 @@
              xmlns:mvc="http://www.springframework.org/schema/mvc"
              xmlns:context="http://www.springframework.org/schema/context"
              xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:tx="http://www.springframework.org/schema/tx"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- Scans the classpath of this application for @Components to deploy as beans -->
 
     <context:annotation-config />
     <context:component-scan base-package="ru.ssau.controllers"/>
+
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <!--<mvc:annotation-driven/>-->
@@ -41,10 +43,10 @@
     </beans:bean>
 
     <!--Upload file maxSize = 5 Mb-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="5242880" />
-        <!--<property name="resolveLazily" value="true"/>-->
-    </bean>
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxUploadSize" value="5242880" />-->
+        <!--&lt;!&ndash;<property name="resolveLazily" value="true"/>&ndash;&gt;-->
+    <!--</bean>-->
 
     <import resource="resources.xml"/>
     <!--<import resource="jasper-views.xml"/>-->
@@ -55,8 +57,37 @@
         <property name="password" value="postgres"/>
     </bean>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+        <!--packagesToScan - search Entity and mapping them -->
+        <property name="packagesToScan" value="model" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
+                <!--<property name="generateDdl" value="true" />-->
+                <property name="showSql" value="true" />
+            </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
+
+    <bean id="productService" class="service.ProductService">
+    </bean>
+
+    <bean id="discountService" class="service.DiscountService">
+    </bean>
+
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>  &lt;!&ndash;enable @Transactional&ndash;&gt;-->
+    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
+    <!--</bean>-->
 
 </beans:beans>

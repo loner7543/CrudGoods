@@ -10,7 +10,8 @@
     <url>http://localhost:8080</url>
 
     <properties>
-        <org.springframework.version>3.2.3.RELEASE</org.springframework.version>
+        <spring.version>4.3.4.RELEASE</spring.version>
+        <hibernate.version>4.3.0.Final</hibernate.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
     </properties>
 
@@ -50,42 +51,15 @@
     </profiles>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${org.springframework.version}</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${org.springframework.version}</version>
-            <scope>compile</scope>
-            <optional>false</optional>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>${spring.version}</version>
             <scope>compile</scope>
             <optional>false</optional>
         </dependency>
@@ -118,20 +92,81 @@
             <scope>compile</scope>
             <optional>false</optional>
         </dependency>
-        <!-- additional lib by spring security -->
+
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${org.springframework.version}</version>
-            <scope>compile</scope>
-            <optional>false</optional>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${org.springframework.version}</version>
-            <scope>compile</scope>
-            <optional>false</optional>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <!--  JSR 303 with Hibernate Validator -->
         <dependency>
@@ -173,13 +208,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3</version>
-            <scope>compile</scope>
-            <optional>false</optional>
-        </dependency>
 
 
         <dependency>
@@ -215,7 +243,25 @@
             <version>5.2.8.Final</version>
         </dependency>
 
+        <dependency>
+        <groupId>org.hibernate.common</groupId>
+        <artifactId>hibernate-commons-annotations</artifactId>
+        <version>5.0.1.Final</version>
+    </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.0-rc1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.1.Final</version>
+        </dependency>
 
     </dependencies>
     <build>

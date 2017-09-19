@@ -28,16 +28,15 @@ public class Seller implements Serializable {
     @Column(name = "birthdate")
     private Date birthDate;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "email")
     private String email;
 
     @Column(name = "deliveryaddress")
     private String deliveryAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "saleid")
-    private Sale sale;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "saleid")
+//    private Sale sale;
 
     public Seller() {
     }
@@ -107,4 +106,12 @@ public class Seller implements Serializable {
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
+
+//    public Sale getSale() {
+//        return sale;
+//    }
+//
+//    public void setSale(Sale sale) {
+//        this.sale = sale;
+//    }
 }
