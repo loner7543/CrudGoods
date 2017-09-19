@@ -3,6 +3,7 @@ package ru.ssau.controllers;
 import model.Discount;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class IndexController {
 
     @Autowired
     private DiscountService discountService;
+
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/")

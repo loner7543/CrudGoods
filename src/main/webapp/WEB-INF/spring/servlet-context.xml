@@ -34,6 +34,8 @@
         <property name="cacheSeconds" value="0"/>
     </bean>
 
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
     <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -78,16 +80,16 @@
         </property>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>  <!--enable @Transactional-->
+
     <bean id="productService" class="service.ProductService">
     </bean>
 
     <bean id="discountService" class="service.DiscountService">
     </bean>
-
-
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>  &lt;!&ndash;enable @Transactional&ndash;&gt;-->
-    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
-    <!--</bean>-->
 
 </beans:beans>
