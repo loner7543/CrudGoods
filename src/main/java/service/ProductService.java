@@ -38,10 +38,10 @@ public class ProductService {
         entityManager.persist(product);
     }
 
-//    @Transactional
-//    public void removeProduct(Product product){
-//        entityManager.remove(product);
-//    }
+    @Transactional
+    public void removeProduct(Product product){
+        entityManager.remove(product);
+    }
 
     @Transactional
     public Product findProductById(int id){

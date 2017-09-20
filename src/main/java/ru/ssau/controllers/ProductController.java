@@ -31,14 +31,14 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateProduct")
     public void updateProduct(){
-        Product product = new Product("chocolate1",12,"in");
+        Product product = new Product(23,"qwe",12,"in");
         productService.update(product);
         String s = "";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/removeProduct")
     public void deleteProduct(){
-        Product product = new Product("chocolate1",12,"in");
+        Product product = new Product(19,"qwe",12,"in");
         productService.delete(product);
         String s = "";
     }
