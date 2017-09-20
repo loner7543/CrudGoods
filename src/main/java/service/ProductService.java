@@ -37,4 +37,26 @@ public class ProductService {
     public void saveProducr(Product product){
         entityManager.persist(product);
     }
+
+//    @Transactional
+//    public void removeProduct(Product product){
+//        entityManager.remove(product);
+//    }
+
+    @Transactional
+    public Product findProductById(int id){
+        return entityManager.find(Product.class,id);
+    }
+
+    @Transactional
+    public void update(Product product){
+        entityManager.merge(product);
+    }
+
+    @Transactional
+    public void delete(Product product){
+        entityManager.remove(entityManager.contains(product) ? product : entityManager.merge(product));
+    }
+
+
 }
