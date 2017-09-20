@@ -23,13 +23,27 @@ public class Product implements Serializable{
 
     @Column(name = "unitname")
     private String unitName;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-////    @JoinColumn(name = "discount_id")
-//    private Discount discount;
 
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER,targetEntity = Discount.class,cascade = CascadeType.ALL)
+    private Set<Discount> discounts = new HashSet<Discount>();
 
     public Product() {
+    }
+
+
+    public Set<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(Set<Discount> discounts) {
+        this.discounts = discounts;
+    }
+
+    public Product(String name, int unitCoast, String unitName, Set<Discount> discounts) {
+        this.name = name;
+        this.unitCoast = unitCoast;
+        this.unitName = unitName;
+        this.discounts = discounts;
     }
 
     public Product(String name, int unitCoast, String unitName) {
@@ -77,12 +91,5 @@ public class Product implements Serializable{
         this.unitName = unitName;
     }
 
-//    public Discount getDiscount() {
-//        return discount;
-//    }
-//
-//    public void setDiscount(Discount discount) {
-//        this.discount = discount;
-//    }
 }
 

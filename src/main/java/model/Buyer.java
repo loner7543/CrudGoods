@@ -36,12 +36,9 @@ public class Buyer implements Serializable {
     @Column(name = "livingaddress")
     private String livingAddress;
 
-//    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Discount.class)
-//    private Set<Discount> discounts = new HashSet<Discount>();
-//
-////    @ManyToOne(fetch = FetchType.LAZY)
-////    @JoinColumn(name = "saleid")
-//    private Sale sale;
+    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Discount.class)
+    private Set<Discount> discounts = new HashSet<Discount>();
+
 
     public Buyer() {
     }
@@ -54,6 +51,16 @@ public class Buyer implements Serializable {
         this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.livingAddress = livingAddress;
+    }
+
+    public Buyer(String firstName, String middleName, String lastName, Date birthDate, String phoneNumber, String livingAddress, Set<Discount> discounts) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.phoneNumber = phoneNumber;
+        this.livingAddress = livingAddress;
+        this.discounts = discounts;
     }
 
     public int getId() {
@@ -112,11 +119,11 @@ public class Buyer implements Serializable {
         this.livingAddress = livingAddress;
     }
 
-//    public Set<Discount> getDiscounts() {
-//        return discounts;
-//    }
-//
-//    public void setDiscounts(Set<Discount> discounts) {
-//        this.discounts = discounts;
-//    }
+    public Set<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(Set<Discount> discounts) {
+        this.discounts = discounts;
+    }
 }

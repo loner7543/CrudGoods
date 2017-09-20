@@ -17,9 +17,6 @@ public class Discount implements Serializable {
     @Column(name = "id")
     private int id;
 
-//    @OneToMany(mappedBy="discount", cascade = CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Product.class)
-//    private Set<Product> products = new HashSet<Product>();
-
     @Column(name = "actingfrom")
     private Date actualFrom;
 
@@ -29,7 +26,30 @@ public class Discount implements Serializable {
     @Column(name = "amountDiscount")
     private int amountDiscount;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
+
     public Discount() {
+    }
+
+    public Discount(Date actualFrom, Date actualTo, int amountDiscount, Product product) {
+        this.actualFrom = actualFrom;
+        this.actualTo = actualTo;
+        this.amountDiscount = amountDiscount;
+        this.product = product;
+    }
+
+    public Discount(Date actualFrom, Date actualTo, int amountDiscount, Product product, Buyer buyer) {
+        this.actualFrom = actualFrom;
+        this.actualTo = actualTo;
+        this.amountDiscount = amountDiscount;
+        this.product = product;
+        this.buyer = buyer;
     }
 
     public int getId() {
@@ -56,13 +76,6 @@ public class Discount implements Serializable {
         this.actualTo = actualTo;
     }
 
-//    public Set<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(Set<Product> products) {
-//        this.products = products;
-//    }
 
     public int getAmountDiscount() {
         return amountDiscount;
@@ -70,5 +83,21 @@ public class Discount implements Serializable {
 
     public void setAmountDiscount(int amountDiscount) {
         this.amountDiscount = amountDiscount;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 }

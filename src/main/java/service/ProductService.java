@@ -27,7 +27,7 @@ public class ProductService {
     }
 
     @Transactional
-    public List<Product> getAll(){
+    public List<Product> getAll(){//++
         String query = "from Product order by id";
         TypedQuery<Product> typedQuery = entityManager.createQuery(query, Product.class);
         return typedQuery.getResultList();
