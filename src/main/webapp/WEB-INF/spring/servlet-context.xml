@@ -41,7 +41,7 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="exposeContextBeansAsAttributes" value="true"/>
         <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
+        <property name="suffix" value=".html"/>
     </beans:bean>
 
     <!--Upload file maxSize = 5 Mb-->
