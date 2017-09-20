@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,6 +27,7 @@ public class Product implements Serializable{
     private String unitName;
 
     @OneToMany(mappedBy = "product",fetch = FetchType.EAGER,targetEntity = Discount.class,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 
     public Product() {
