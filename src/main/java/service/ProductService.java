@@ -30,7 +30,11 @@ public class ProductService {
     public List<Product> getAll(){//++
         String query = "from Product order by id";
         TypedQuery<Product> typedQuery = entityManager.createQuery(query, Product.class);
-        return typedQuery.getResultList();
+        List<Product> resultList = typedQuery.getResultList();
+        resultList.forEach( elm -> {
+            elm.getDiscounts().size();
+        });
+        return resultList;
     }
 
     @Transactional

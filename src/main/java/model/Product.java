@@ -1,6 +1,8 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "productsequence")
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name = "product")
 public class Product implements Serializable{
     private static final long serialVersionUID = -372011220359696447L;
@@ -26,7 +29,8 @@ public class Product implements Serializable{
     @Column(name = "unitname")
     private String unitName;
 
-    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER,targetEntity = Discount.class,cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER,targetEntity = Discount.class,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 
