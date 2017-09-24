@@ -3,6 +3,7 @@
 
   angular
     .module('frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ui.router', 'toastr']);
+  //модуль + его зависимости
 
- 
+
 })();
