@@ -8,6 +8,15 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
 
+    // var buyerState={
+    //   name:"buyer",
+    //   url:"/buyer",
+    //   template:"<h3>deffef</h3>h3>"
+    // };
+    // debugger;
+    // $stateProvider.state(buyerState);
+
+
     // $stateProvider
     //   .state('login', {
     //     url: '/login',

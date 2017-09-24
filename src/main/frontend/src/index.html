@@ -39,10 +39,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>Milk</td>
-    <td>12$</td>
-    <td>pint</td>
+  <tr ng-repeat="item in items">
+    <td>{{item.name}}</td>
+    <td>{{item.coast}}</td>
+    <td>{{item.ed}}</td>
   </tr>
   </tbody>
 </table>
@@ -50,6 +50,7 @@
 <button ng-click="addProductClickHandler()">Добавить товар</button>
 <button ng-click="editProductHandler()">Изменить товар</button>
 <button ng-click="deleteProductHandler()">Удалить товар</button>
+<button ng-click="sendRequest()">Загрузить  товары</button>
 
 <!-- build:js(src) scripts/vendor.js -->
 <!-- bower:js -->
