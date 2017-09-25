@@ -18,15 +18,6 @@ import java.util.Set;
 
 @Controller
 public class IndexController {
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private DiscountService discountService;
-
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String slash(Model model, HttpSession session) {
         return "redirect:/welcome";
@@ -37,14 +28,5 @@ public class IndexController {
 
         ModelAndView modelAndView = new ModelAndView("welcome");
         return modelAndView;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public void testDb(){
-        Product product = new Product("Milk",12,"L");
-        productService.saveProducr(product);
-//        List<Product> products = productService.getAll();
-//        Set<Discount> discountSet = products.get(0).getDiscounts();
-//        String s = "derfrf";
     }
 }

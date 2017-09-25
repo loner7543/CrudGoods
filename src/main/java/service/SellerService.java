@@ -40,6 +40,6 @@ public class SellerService {
 
     @Transactional
     public void deleteSeller(Seller seller){
-
+        entityManager.remove(seller);
     }
 }

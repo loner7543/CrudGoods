@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import service.SellerService;
 
@@ -19,7 +20,7 @@ public class SellerController {
     private SellerService sellerService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/getAllSellers")
-    public List<Seller> getAllSellers(){
+    public @ResponseBody List<Seller> getAllSellers(){
         return sellerService.getAllSellers();
     }
 

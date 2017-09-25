@@ -10,6 +10,7 @@ import service.DiscountService;
 
 import java.util.List;
 
+//todo replace all null's values
 @Controller
 public class DiscountController {
 
@@ -20,5 +21,20 @@ public class DiscountController {
     public @ResponseBody List<Discount> getAddDiscounts(){
         List<Discount> discounts = discountService.getAllDisc();
         return discounts;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/addDiscount")
+    public void addNewDiscount(){
+        discountService.addDiscount(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateDiscount")
+    public void updateDiscount(){
+        discountService.updateDiscount(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/deleteDiscount")
+    public void deleteDiscount(){
+        discountService.deleteDiscount(null);
     }
 }

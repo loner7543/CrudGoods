@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import service.BuyerService;
 
 import java.util.List;
@@ -15,10 +16,15 @@ public class BuyerController {
     @Autowired
     private BuyerService buyerService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/gab")
-    public void getAllBuyerrs(){
+    @RequestMapping(method = RequestMethod.GET, value = "/getAllBuyers")
+    public @ResponseBody List<Buyer> getAllBuyerrs(){
         List<Buyer> buyers = buyerService.getAll();
-        String s = "";
+        return buyers;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/updateBuyer")
+    public void updateBuyer(){
+        buyerService.updateBuyer(null);
 
     }
 }

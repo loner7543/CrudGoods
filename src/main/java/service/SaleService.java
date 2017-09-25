@@ -21,18 +21,22 @@ public class SaleService {
         return typedQuery.getResultList();
     }
 
+    @Transactional
     public void addSale(Sale sale){
         entityManager.persist(sale);
     }
 
+    @Transactional
     public void updateSale(Sale sale){
         entityManager.merge(sale);
     }
 
+    @Transactional
     public Sale getSaleById(int id) {
         return entityManager.find(Sale.class,id);
     }
 
+    @Transactional
     public void deleteSale(Sale sale){
         entityManager.remove(sale);
     }

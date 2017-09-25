@@ -19,6 +19,30 @@ public class BuyerService {
     public List<Buyer> getAll(){//++
         String query = "from Buyer order by id";
         TypedQuery<Buyer> typedQuery = entityManager.createQuery(query, Buyer.class);
-        return typedQuery.getResultList();
+        List<Buyer> buyers = typedQuery.getResultList();
+        buyers.forEach( elm -> {
+            elm.getDiscounts().size();
+        });
+        return buyers;
+    }
+
+    @Transactional
+    public void addBuyer(Buyer buyer){
+        entityManager.persist(buyer);
+    }
+
+    @Transactional
+    public void updateBuyer(Buyer newBuyer){
+        entityManager.merge(newBuyer);
+    }
+
+    @Transactional
+    public Buyer getBuyerById(int id){
+        return entityManager.find(Buyer.class,id);
+    }
+
+    @Transactional
+    public void removeBuyer(Buyer buyer){
+        entityManager.remove(buyer);
     }
 }

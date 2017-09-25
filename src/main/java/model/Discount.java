@@ -34,6 +34,7 @@ public class Discount implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)

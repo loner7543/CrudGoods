@@ -25,6 +25,27 @@ public class DiscountService {
     public List<Discount> getAllDisc(){
         String query = "from Discount order by id";
         TypedQuery<Discount> typedQuery = entityManager.createQuery(query, Discount.class);
-        return typedQuery.getResultList();
+        List<Discount> discounts = typedQuery.getResultList();
+        return discounts;
+    }
+
+    @Transactional
+    public void addDiscount(Discount discount){
+        entityManager.persist(discount);
+    }
+
+    @Transactional
+    public void updateDiscount(Discount discount){
+        entityManager.merge(discount);
+    }
+
+    @Transactional
+    public Discount findDiscountById(int id){
+        return entityManager.find(Discount.class,id);
+    }
+
+    @Transactional
+    public void deleteDiscount(Discount discount){
+        entityManager.remove(discount);
     }
 }
