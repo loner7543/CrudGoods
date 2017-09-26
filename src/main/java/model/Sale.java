@@ -1,5 +1,9 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +13,7 @@ import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "salesequence")
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name = "sale")
 public class Sale implements Serializable {
 
@@ -30,6 +35,16 @@ public class Sale implements Serializable {
     @Column(name = "amountproduct")
     private int amountProduct;
 
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "sale",targetEntity = Product.class)
+    @JsonManagedReference
+    private  Set<Product> products = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
+
+
+
     public Sale() {
     }
 
@@ -40,8 +55,31 @@ public class Sale implements Serializable {
         this.amountProduct = amountProduct;
     }
 
+    public Sale(Date orderDate, Date deliveryDate, int amountProduct, Set<Product> products) {
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.amountProduct = amountProduct;
+        this.products = products;
+    }
+
+    public Sale(Date orderDate, Date deliveryDate, int amountProduct, Set<Product> products, Buyer buyer) {
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.amountProduct = amountProduct;
+        this.products = products;
+        this.buyer = buyer;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
     }
 
     public void setId(int id) {
@@ -64,29 +102,13 @@ public class Sale implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-//    public Set<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProduct(Set<Product> products) {
-//        this.products = products;
-//    }
-//
-//    public Set<Buyer> getBuyers() {
-//        return buyers;
-//    }
-//
-//    public void setBuyers(Set<Buyer> buyers) {
-//        this.buyers = buyers;
-//    }
-//
-//    public Set<Seller> getSeller() {
-//        return sellers;
-//    }
-//
-//    public void setSeller(Set<Seller> sellers) {
-//        this.sellers = sellers;
-//    }
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public int getAmountProduct() {
         return amountProduct;

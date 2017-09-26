@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
+// wrong serialization
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "discountsequence")
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")

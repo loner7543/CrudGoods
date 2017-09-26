@@ -25,6 +25,15 @@ public class BuyerController {
     @RequestMapping(method = RequestMethod.GET, value = "/updateBuyer")
     public void updateBuyer(){
         buyerService.updateBuyer(null);
+    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/addBuyer")
+    public void addBuyer(){
+        buyerService.addBuyer(null);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/deleteBuyer")
+    public void deleteBuyer(){
+        buyerService.removeBuyer(null);
     }
 }

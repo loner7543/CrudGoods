@@ -90,3 +90,16 @@ create table sale(
    alter table sale add constraint buyerFK foreign key(buyerId) references  buyer(id);
     alter table sale add constraint sellerFK foreign key(sellerId) references  seller(id);
 select * from ProDuct
+
+insert into sale values(nextval('salesequence'), 100,to_date('1963-09-01', 'YYYY-MM-DD'),to_date('1963-09-01', 'YYYY-MM-DD'));
+insert into sale values(nextval('salesequence'), 500,to_date('1983-09-01', 'YYYY-MM-DD'),to_date('1993-09-01', 'YYYY-MM-DD'));
+update product set sale_id=1 where id=19;
+update product set sale_id=1 where id=20;
+update product set sale_id=1 where id=21;
+
+update product set sale_id=2 where id=22;
+update product set sale_id=2 where id=24;
+
+insert into seller values(nextval('selersequence'),to_date('1983-09-01', 'YYYY-MM-DD'),'grove street','mail@asd','first','last','middle',1);
+insert into seller values(nextval('selersequence'),to_date('1953-09-01', 'YYYY-MM-DD'),'grove street','mail@asd','first2','last2','middle2',2);
+update sale set buyer_id=2

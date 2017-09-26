@@ -16,9 +16,14 @@ public class SaleService {
 
     @Transactional
     public List<Sale> getAllSells(){
-        String query = "from Seller order by id";
+        String query = "from Sale order by id";
         TypedQuery<Sale> typedQuery = entityManager.createQuery(query, Sale.class);
-        return typedQuery.getResultList();
+        List<Sale> sales = typedQuery.getResultList();
+        sales.forEach( elm -> {
+            elm.getProducts().size();// lazy init
+        });
+        sales.forEach(elm->elm.getBuyer().getDiscounts().size());
+        return sales;
     }
 
     @Transactional

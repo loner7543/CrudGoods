@@ -1,5 +1,8 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,6 +10,7 @@ import java.util.Date;
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "selersequence")
 @Entity
 @Table(name = "seller")
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")// todo check
 public class Seller implements Serializable {
 
     private static final long serialVersionUID = -2766873791972479486L;
@@ -34,9 +38,9 @@ public class Seller implements Serializable {
     @Column(name = "deliveryaddress")
     private String deliveryAddress;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "saleid")
-//    private Sale sale;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 
     public Seller() {
     }
@@ -49,6 +53,16 @@ public class Seller implements Serializable {
         this.birthDate = birthDate;
         this.email = email;
         this.deliveryAddress = deliveryAddress;
+    }
+
+    public Seller(String firstName, String middleName, String lastName, Date birthDate, String email, String deliveryAddress, Sale sale) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.deliveryAddress = deliveryAddress;
+        this.sale = sale;
     }
 
     public int getId() {
@@ -107,11 +121,11 @@ public class Seller implements Serializable {
         this.deliveryAddress = deliveryAddress;
     }
 
-//    public Sale getSale() {
-//        return sale;
-//    }
-//
-//    public void setSale(Sale sale) {
-//        this.sale = sale;
-//    }
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
 }
