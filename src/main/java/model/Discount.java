@@ -10,10 +10,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-// wrong serialization
+
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "discountsequence")
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Table(name = "discount")
 public class Discount implements Serializable {
 
@@ -32,7 +32,7 @@ public class Discount implements Serializable {
     @Column(name = "amountDiscount")
     private int amountDiscount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonBackReference
     private Product product;

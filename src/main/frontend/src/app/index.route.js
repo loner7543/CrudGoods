@@ -30,6 +30,19 @@
     //     resolve: {}
     //   });
 
+     $stateProvider
+       .state('buyer', {
+         url: '/buyer',
+         views: {
+           'index': {
+             templateUrl: 'app/buyer/buyer.html',
+             controller: 'BuyerController',
+             controllerAs: 'buyerCtrl'
+           }
+         },
+         resolve: {}
+       });
+
     $urlRouterProvider.otherwise(function ($injector, $location) {
       console.log($injector, $location);
       return "/";

@@ -5,6 +5,7 @@
   <title>Товар</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
   <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -26,31 +27,13 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 <ul>
-  <li>Товар</li>
+  <li ui-sref="buyer">Товар</li>
   <li>Скидка</li>
   <li>Продажа</li>
 </ul>
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Название</th>
-    <th>Цена за единицу</th>
-    <th>Единица измерения</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="item in items">
-    <td>{{item.name}}</td>
-    <td>{{item.coast}}</td>
-    <td>{{item.ed}}</td>
-  </tr>
-  </tbody>
-</table>
 
-<button ng-click="addProductClickHandler()">Добавить товар</button>
-<button ng-click="editProductHandler()">Изменить товар</button>
-<button ng-click="deleteProductHandler()">Удалить товар</button>
-<button ng-click="sendRequest()">Загрузить  товары</button>
+<div ui-view="index"></div>
+
 
 <!-- build:js(src) scripts/vendor.js -->
 <!-- bower:js -->

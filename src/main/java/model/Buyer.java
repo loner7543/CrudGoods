@@ -38,7 +38,7 @@ public class Buyer implements Serializable {
     @Column(name = "livingaddress")
     private String livingAddress;
 
-    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.EAGER,targetEntity = Discount.class)
+    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Discount.class)
     @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 
