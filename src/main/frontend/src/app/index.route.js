@@ -7,37 +7,58 @@
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
-
-    // var buyerState={
-    //   name:"buyer",
-    //   url:"/buyer",
-    //   template:"<h3>deffef</h3>h3>"
-    // };
-    // debugger;
-    // $stateProvider.state(buyerState);
-
-
-    // $stateProvider
-    //   .state('login', {
-    //     url: '/login',
-    //     views: {
-    //       'index': {
-    //         templateUrl: 'app/login/login.html',
-    //         controller: 'LoginController',
-    //         controllerAs: 'loginCtrl'
-    //       }
-    //     },
-    //     resolve: {}
-    //   });
-
      $stateProvider
-       .state('buyer', {
-         url: '/buyer',
+       .state('products', {
+         url: '/products',
          views: {
            'index': {
-             templateUrl: 'app/buyer/buyer.html',
-             controller: 'BuyerController',
-             controllerAs: 'buyerCtrl'
+             templateUrl: 'app/item/item.html',
+             controller: 'ItemController',
+             controllerAs: 'itemCtrl'
+           }
+         },
+         resolve: {}
+       })
+       .state('buyers', {
+       url: '/buyers',
+       views: {
+         'index': {
+           templateUrl: 'app/buyer/buyer.html',
+           controller: 'BuyerController',
+           controllerAs: 'buyerCtrl'
+         }
+       },
+       resolve: {}
+     })
+       .state('discounts', {
+       url: '/discounts',
+       views: {
+         'index': {
+           templateUrl: 'app/discount/discount.html',
+           controller: 'DiscountController',
+           controllerAs: 'discountCtrl'
+         }
+       },
+       resolve: {}
+     })
+       .state('sales', {
+         url: '/sales',
+         views: {
+           'index': {
+             templateUrl: 'app/sale/sale.html',
+             controller: 'SaleController',
+             controllerAs: 'saleCtrl'
+           }
+         },
+         resolve: {}
+       })
+       .state('sellers', {
+         url: '/sellers',
+         views: {
+           'index': {
+             templateUrl: 'app/seler/seller.html',
+             controller: 'SellersController',
+             controllerAs: 'sellerCtrl'
            }
          },
          resolve: {}
