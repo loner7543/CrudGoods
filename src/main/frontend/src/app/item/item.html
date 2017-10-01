@@ -9,13 +9,32 @@
   <tbody>
   <tr ng-repeat="item in items">
     <td>{{item.name}}</td>
-    <td>{{item.coast}}</td>
-    <td>{{item.ed}}</td>
+    <td>{{item.unitCoast}}</td>
+    <td>{{item.unitName}}</td>
+    <td>
+      <button ng-click="buyerCtrl.toggleModal()" class="btn btn-primary">Добавить товар</button>
+      <button ng-click="editProductHandler()">Изменить товар</button>
+      <button ng-click="editProductHandler()">Удалить товар</button>
+    </td>
   </tr>
   </tbody>
 </table>
 
-<button ng-click="buyerCtrl.addProductClickHandler()">Добавить товар</button>
-<button ng-click="editProductHandler()">Изменить товар</button>
-<button ng-click="deleteProductHandler()">Удалить товар</button>
 <button ng-click="sendRequest()">Загрузить  товары</button>
+<p><input type="checkbox" ng-model="showAddDiv"/>Показать скидки</p>
+
+<!--<button ng-click='toggleModal()'>Open dialog</button>-->
+<!--<modal-dialog show='modalShown' width='500px' height='60%'>-->
+  <!--<p>Содержимое модального окна<p>-->
+<!--</modal-dialog>-->
+
+
+<div ng-show="showAddDiv">
+  <div ng-repeat="discount in discountsMas">
+    <div>
+      <p>Действует с  {{discount.actualFrom}} </p>
+      <p>Действует по {{t}} </p>
+      <p>Величина скидки</p>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,30 @@
 <div>
   <h2>Покупатели</h2>
-  <input type="button" value="Добавить покупател"/>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <td>Фамилия</td>
+      <td>Имя</td>
+      <td>Отчество</td>
+      <td>Дата рождения</td>
+      <td>Телефонный номер</td>
+      <td>Адрес</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="buyer in buyres">
+      <td>{{buyer.firstName}}</td>
+      <td>{{buyer.middleName}}</td>
+      <td>{{buyer.lastName}}</td>
+      <td>{{buyer.birthDate}}</td>
+      <td>{{buyer.phoneNumber}}</td>
+      <td>{{buyer.livingAddress}}</td>
+      <td><button class="btn btn-primary" ng-click="showBuyerDialog()">Добавить покупателя</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <button ng-click="getAllBuyers()">Загрузить покупателей</button>
 </div>
+<pop-up-dialog></pop-up-dialog>
+
+
