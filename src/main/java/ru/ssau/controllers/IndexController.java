@@ -29,4 +29,10 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView("welcome");
         return modelAndView;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/index")
+    public ModelAndView showIndex(){
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }
 }

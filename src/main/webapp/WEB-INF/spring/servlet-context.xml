@@ -40,15 +40,10 @@
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="exposeContextBeansAsAttributes" value="true"/>
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value="/WEB-INF/"/>
+        <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
         <property name="suffix" value=".html"/>
     </beans:bean>
-
-    <!--Upload file maxSize = 5 Mb-->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-        <!--<property name="maxUploadSize" value="5242880" />-->
-        <!--&lt;!&ndash;<property name="resolveLazily" value="true"/>&ndash;&gt;-->
-    <!--</bean>-->
 
     <import resource="resources.xml"/>
     <!--<import resource="jasper-views.xml"/>-->
