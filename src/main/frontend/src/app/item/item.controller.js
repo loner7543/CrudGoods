@@ -34,8 +34,9 @@
   })
     .controller('ItemController', ItemController);
 
-  function ItemController($scope,$http) {
+  function ItemController($scope,$http,UtilsFunctionsFactory) {
     var vm  =this;
+    vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
 
     $scope.modalShown = false;
@@ -55,7 +56,8 @@
         var discounts = $scope.items[i].discounts;
         console.log(discounts);
         for(var j =0;j<discounts.length;j++){
-          var date = new Date(discounts[j].actualFrom).toDateString();
+          debugger;
+          var date = UtilsFunctionsFactory.toDate(discounts[j].actualFrom);
           discounts[j].actualFrom = date;
           discountMas.push(discounts[j])
         }
