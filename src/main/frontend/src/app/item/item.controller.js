@@ -56,7 +56,6 @@
         var discounts = $scope.items[i].discounts;
         console.log(discounts);
         for(var j =0;j<discounts.length;j++){
-          debugger;
           var date = UtilsFunctionsFactory.toDate(discounts[j].actualFrom);
           discounts[j].actualFrom = date;
           discountMas.push(discounts[j])
