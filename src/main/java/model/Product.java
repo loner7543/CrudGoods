@@ -32,7 +32,7 @@ public class Product implements Serializable{
 
 //
 //    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER,targetEntity = Discount.class,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();
 

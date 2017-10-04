@@ -32,12 +32,12 @@ public class Discount implements Serializable {
     @Column(name = "amountDiscount")
     private int amountDiscount;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     @JsonBackReference
     private Product product;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id")
     @JsonBackReference
     private Buyer buyer;

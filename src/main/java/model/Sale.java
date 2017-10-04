@@ -35,7 +35,7 @@ public class Sale implements Serializable {
     @Column(name = "amountproduct")
     private int amountProduct;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "sale",targetEntity = Product.class)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "sale",targetEntity = Product.class)
     @JsonManagedReference
     private  Set<Product> products = new HashSet<>();
 

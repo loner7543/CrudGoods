@@ -22,6 +22,7 @@ public class SaleService {
         sales.forEach( elm -> {
             elm.getProducts().size();// lazy init
         });
+        sales.forEach(s->s.getProducts().forEach(product -> product.getDiscounts().size()));
         sales.forEach(elm->elm.getBuyer().getDiscounts().size());
         return sales;
     }
