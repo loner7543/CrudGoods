@@ -18,21 +18,21 @@ import java.util.Set;
 
 @Controller
 public class IndexController {
-    @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String slash(Model model, HttpSession session) {
-        return "redirect:/welcome";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/welcome")
-    public ModelAndView welcome(Model model, HttpSession session) {
-
-        ModelAndView modelAndView = new ModelAndView("welcome");
-        return modelAndView;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/index")
-    public ModelAndView showIndex(){
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/")
+//    public String slash(Model model, HttpSession session) {
+//        return "redirect:/welcome";
+//    }
+//
+//    @RequestMapping(method = RequestMethod.GET, value = "/welcome")
+//    public ModelAndView welcome(Model model, HttpSession session) {
+//
+//        ModelAndView modelAndView = new ModelAndView("welcome");
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping(method = RequestMethod.GET, value = "/index")
+//    public ModelAndView showIndex(){
+//        ModelAndView modelAndView = new ModelAndView("index");
+//        return modelAndView;
+//    }
 }

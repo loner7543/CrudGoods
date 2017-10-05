@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <version>1.0</version>
     <name>crudGoods</name>
-    <url>http://localhost:8080</url>
+    <!--<url>http://localhost:8080</url>-->
 
     <properties>
         <spring.version>4.3.4.RELEASE</spring.version>
@@ -266,6 +266,7 @@
     <build>
         <sourceDirectory>./src/main/java</sourceDirectory>
         <testSourceDirectory>./src/test</testSourceDirectory>
+        <finalName>crudGoods</finalName>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

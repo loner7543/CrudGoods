@@ -20,11 +20,11 @@
     }
   })
 
-  function BuyerController($scope, $http,$interval) {
+  function BuyerController($scope, $http,$interval, $location) {
     var vm = this;
 
     $scope.getAllBuyers = function () {
-      var promise = $http.get("../../data/buyers.json");
+      var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
       promise.then(fulfilled, rejected)
     }
 

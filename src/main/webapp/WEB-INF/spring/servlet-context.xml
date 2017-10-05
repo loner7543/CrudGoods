@@ -27,7 +27,7 @@
     <mvc:default-servlet-handler/>
 
     <!-- Forwards requests to the "/" resource to the "welcome" view -->
-    <mvc:view-controller path="/"/>
+    <!--<mvc:view-controller path="/"/>-->
     <!--<mvc:view-controller path="/index" view-name="applConfig"/>-->
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -36,14 +36,14 @@
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-    <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
-    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="exposeContextBeansAsAttributes" value="true"/>
-        <property name="prefix" value="/WEB-INF/"/>
-        <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
-        <property name="suffix" value=".html"/>
-    </beans:bean>
+    <!--&lt;!&ndash; Resolves view names to protected .jsp resources within the /WEB-INF/views directory &ndash;&gt;-->
+    <!--<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--<property name="exposeContextBeansAsAttributes" value="true"/>-->
+        <!--<property name="prefix" value="/WEB-INF/"/>-->
+        <!--&lt;!&ndash;<property name="prefix" value="/WEB-INF/pages/"/>&ndash;&gt;-->
+        <!--<property name="suffix" value=".html"/>-->
+    <!--</beans:bean>-->
 
     <import resource="resources.xml"/>
     <!--<import resource="jasper-views.xml"/>-->
