@@ -1,6 +1,6 @@
 <div>
   <h3>Продажи</h3>
-  <table class="ефиду table-hover">
+  <table class="table table-hover">
     <thead>
     <tr>
       <th>Дата закааза</th>
@@ -13,10 +13,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>{{}}</td>
-      <td>{{}}</td>
-      <td>{{}}</td>
+    <tr ng-repeat="sale in sales">
+      <td>{{sale.orderDate}}</td>
+      <td>{{sale.deliveryDate}}</td>
+      <td>{{sale.amountProduct}}</td>
       <td>{{}}</td>
       <td>{{}}</td>
       <td>{{}}</td>
@@ -25,4 +25,5 @@
     </tr>
     </tbody>
   </table>
+  <button ng-click="getAllSells()">Загрузить продажи</button>
 </div>

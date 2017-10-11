@@ -4,7 +4,7 @@
     .module('frontend')
     .controller('DiscountController', DiscountController);
 
-  function DiscountController($scope, $http) {
+  function DiscountController($scope, $http,UtilsFunctionsFactory) {
     var vm = this;
     $scope.sendRequest = function () {
       var promise = $http.get("../../data/discounts.json");
@@ -13,6 +13,12 @@
 
     function fulfilled(resp) {
       console.log(resp);
+      var log = [];
+      angular.forEach(resp.data, function(value, key) {
+        console.log(value);
+        console.log(key);
+        this.push(key + ': ' + value);
+      }, log);
       $scope.discounts = resp.data;
     }
 
