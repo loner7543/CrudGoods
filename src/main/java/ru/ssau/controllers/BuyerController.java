@@ -36,4 +36,6 @@ public class BuyerController {
     public void deleteBuyer(){
         buyerService.removeBuyer(null);
     }
+
+    //http://localhost:8080/crudGoods/index.html#/buyers
 }
