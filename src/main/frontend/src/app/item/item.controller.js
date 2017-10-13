@@ -56,13 +56,14 @@
         var discounts = $scope.items[i].discounts;
         console.log(discounts);
         for(var j =0;j<discounts.length;j++){
-          var date = UtilsFunctionsFactory.toDate(discounts[j].actualFrom);
-          discounts[j].actualFrom = date;
-          discountMas.push(discounts[j])
+          var actualFromDate = UtilsFunctionsFactory.toDate(discounts[j].actualFrom);
+          var actualToDate = UtilsFunctionsFactory.toDate(discounts[j].actualTo);
+          discounts[j].actualFrom = actualFromDate;
+          discounts[j].actualTo = actualToDate;
+          discountMas.unshift(discounts[j])
         }
       }
       $scope.discountsMas=discountMas
-
     }
 
     function rejected(err) {
