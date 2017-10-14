@@ -3,7 +3,7 @@
     .module('frontend')
     .controller('SellersController', SellersController);
 
-  function SellersController($scope, $http) {
+  function SellersController($scope, $http,ngDialog) {
     var vm = this;
 
     $scope.getAllSellers = function () {
@@ -17,6 +17,13 @@
 
       function rejected(err) {
         console.log(err);
+      }
+
+      $scope.addNewSeller = function () {
+        ngDialog.open({ template: 'app/seler/addSellerDialog.html',
+          className: 'ngdialog-theme-default',
+          scope: $scope
+        });
       }
     }
   }

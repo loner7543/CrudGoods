@@ -1,48 +1,22 @@
 (function () {
   angular
-    .module('frontend').directive("modalDialog",function(){
-    return {
-      restrict: 'E',//применяется к элементу
-      scope: {
-        show: '='
-      },
-      replace: true, // Замените на шаблон
-      transclude: true, // Пользовательский контент внутри - да
-      link: function(scope, element, attrs) {
-        scope.dialogStyle = {};
-
-        if (attrs.width) {
-          scope.dialogStyle.width = attrs.width;
-        }
-
-        if (attrs.height) {
-          scope.dialogStyle.height = attrs.height;
-        }
-
-        scope.hideModal = function() {
-          scope.show = false;
-        };
-      },
-      template: '<div class=\'ng-modal\' ng-show=\'show\'>\n' +
-      '    <div class=\'ng-modal-overlay\' ng-click=\'hideModal()\'></div>\n' +
-      '        <div class=\'ng-modal-dialog\' ng-style=\'dialogStyle\'>\n' +
-      '        <div class=\'ng-modal-close\' ng-click=\'hideModal()\'>X</div>\n' +
-      '        <div class=\'ng-modal-dialog-content\' ng-transclude></div>\n' +
-      '    </div>\n' +
-      '</div>'
-    };
-  })
+    .module('frontend')
     .controller('ItemController', ItemController);
 
-  function ItemController($scope,$http,UtilsFunctionsFactory) {
+  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog) {
     var vm  =this;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
 
     $scope.modalShown = false;
-    $scope.toggleModal = function() {
-      $scope.modalShown = !$scope.modalShown;
+
+    $scope.addItem = function() {
+      ngDialog.open({ template: 'app/item/addItem.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
     }
+
     $scope.sendRequest = function () {
       var promise = $http.get("../../data/products.json");
       promise.then(fulfilled, rejected)

@@ -12,16 +12,23 @@
     </thead>
     <tbody>
     <tr ng-repeat="seller in sellers">
-    <td>{{seller.firstName}}</td>
-    <td>{{seller.middleName}}</td>
-    <td>{{seller.lastName}}</td>
-    <td>{{seller.birthDate}}</td>
-    <td>{{seller.email}}</td>
-    <td>{{seller.deliveryAddress}}</td>
-    <td><button class="btn btn-primary">Изменить</button></td>
-    <td><button class="btn btn-danger">Удалить</button></td>
-</tr>
-</tbody>
+      <td>{{seller.firstName}}</td>
+      <td>{{seller.middleName}}</td>
+      <td>{{seller.lastName}}</td>
+      <td>{{seller.birthDate}}</td>
+      <td>{{seller.email}}</td>
+      <td>{{seller.deliveryAddress}}</td>
+      <td>
+        <button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
+      </td>
+      <td>
+        <button class="btn btn-primary">Изменить</button>
+      </td>
+      <td>
+        <button class="btn btn-danger">Удалить</button>
+      </td>
+    </tr>
+    </tbody>
   </table>
   <button ng-click="getAllSellers()">Загрузить продавцов</button>
 </div>

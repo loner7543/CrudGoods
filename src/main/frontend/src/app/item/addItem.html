@@ -1,7 +1,17 @@
-<div id="container">
-<input type="text" id="GhjluctName" placeholder="Введите название товара">
+<div>
+  <h3>Название товара</h3>
+  <input type="text" id="ProductName" placeholder="Введите название товара">
+  <h3>Цена товара</h3>
   <input type="text" placeholder="Введите цену товара">
-  <input type="text" placeholder="Введите единицу измерения">
-  <button>Ок</button>
-  <button>Отмена</button>
+  <h3>Единица измерения</h3>
+  <input type="text" placeholder="Введите единицу измерения"><br>
+  <h3>Выбеите скидки</h3>
+
+    <select name="discountSelect" ng-model="items.discounts" multiple>
+      <option ng-repeat="option in items.discounts"
+              ng-value="option.id">{{option.id}}</option>
+    </select>
+
+  <button class="btn btn-primary">Добавить</button>
+  <button class="btn btn-danger">Отмена</button>
 </div>

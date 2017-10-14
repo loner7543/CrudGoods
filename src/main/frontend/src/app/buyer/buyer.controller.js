@@ -1,26 +1,9 @@
 (function () {
   angular
     .module('frontend')
-    .controller('BuyerController', BuyerController).directive('popUpDialog', function(){
-    return {
-      restrict: 'E',
-      // scope: false,
-      templateUrl: 'app/buyer/buyerDialog.html',
-      controller: function( $scope ) {
-        $scope.closePopUpDialog = function() {
-          console.log("cancel")
-          $scope.showPopUpDialog = false;
-        }
+    .controller('BuyerController', BuyerController)
 
-        $scope.popUpDialogApprove = function() {
-          console.log("yes")
-          $scope.showPopUpDialog = false;
-        }
-      }
-    }
-  })
-
-  function BuyerController($scope, $http,$interval, $location) {
+  function BuyerController($scope, $http,$interval, $location,ngDialog) {
     var vm = this;
 
     $scope.getAllBuyers = function () {
@@ -38,7 +21,10 @@
       console.log(err);
     }
     $scope.showBuyerDialog = function() {
-      $scope.showPopUpDialog = true;
+      ngDialog.open({ template: 'app/buyer/addBuyer.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
     }
   }
 

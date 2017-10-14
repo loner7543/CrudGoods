@@ -1,5 +1,10 @@
-<div class="content">
+<div>
+  <h3>Дата заказа</h3>
   <input type="text" mask="99.99.9999" placeholder="Введите дату заказа" ng-model="orderDate">
+  <h3>Дата поставки</h3>
   <input type="text" mask="99.99.9999" placeholder="Введите дату доставки" ng-model="deliveryDate">
-  <input type="text" ng-model="amountProduct" placeholder="Введите количество продукта">
+  <h3>Количество продукта</h3>
+  <input type="text" ng-model="amountProduct" placeholder="Введите количество продукта"><br>
+  <button class="btn btn-primary">Добавить</button>
+  <button class="btn btn-danger">Отменить</button>
 </div>

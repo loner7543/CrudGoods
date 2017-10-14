@@ -4,7 +4,7 @@
     .module('frontend')
     .controller('DiscountController', DiscountController);
 
-  function DiscountController($scope, $http,UtilsFunctionsFactory) {
+  function DiscountController($scope, $http,UtilsFunctionsFactory,ngDialog) {
     var vm = this;
     $scope.sendRequest = function () {
       var promise = $http.get("../../data/discounts.json");
@@ -27,6 +27,14 @@
     }
 
     $scope.addDiscount = function() {
+      ngDialog.open({ template: 'app/discount/addDiscount.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
+    }
+
+    $scope.saveDiscount = function () {
+      console.log("bla")
     }
 
   }

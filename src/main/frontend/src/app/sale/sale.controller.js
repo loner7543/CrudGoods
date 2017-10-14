@@ -4,7 +4,7 @@
     .module('frontend')
     .controller('SaleController', SaleController);
 
-  function SaleController($scope, $http) {
+  function SaleController($scope, $http,ngDialog) {
     var vm = this;
 
     $scope.getAllSells = function () {
@@ -19,6 +19,13 @@
 
     function rejected(err) {
       console.log(err);
+    }
+
+    $scope.addNewSale = function () {
+      ngDialog.open({ template: 'app/sale/addSaleDialog.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
     }
   }
 })();
