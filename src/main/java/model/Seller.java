@@ -10,7 +10,7 @@ import java.util.Date;
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "selersequence")
 @Entity
 @Table(name = "seller")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")// todo check
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Seller implements Serializable {
 
     private static final long serialVersionUID = -2766873791972479486L;

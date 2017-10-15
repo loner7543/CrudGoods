@@ -1,13 +1,16 @@
 package ru.ssau.controllers;
 
 import model.Discount;
+import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.DiscountService;
 
+import java.util.Date;
 import java.util.List;
 
 //todo replace all null's values
@@ -24,17 +27,29 @@ public class DiscountController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/addDiscount")
-    public void addNewDiscount(){
-        discountService.addDiscount(null);
+    public void addNewDiscount(@RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
+                               @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
+                               @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount){
+        Discount discount = new Discount(new Date(actualFrom),new Date(actualTo),amountDiscount,null,null);
+        discountService.addDiscount(discount);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateDiscount")
-    public void updateDiscount(){
-        discountService.updateDiscount(null);
+    public void updateDiscount(
+                                @RequestParam(value = Discount.ID_VALUE) Integer discountId,
+                                @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long newActualFromDate,
+                                @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long newActualToDate,
+                                @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer newAmountDiscount){
+        Discount updated = discountService.findDiscountById(discountId);
+        updated.setActualFrom(new Date(newActualFromDate));
+        updated.setActualTo(new Date(newActualToDate));
+        updated.setAmountDiscount(newAmountDiscount);
+        discountService.updateDiscount(updated);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/deleteDiscount")
-    public void deleteDiscount(){
-        discountService.deleteDiscount(null);
+    public void deleteDiscount( @RequestParam(value = Discount.ID_VALUE) Integer discountId){
+        Discount deleted = discountService.findDiscountById(discountId);
+        discountService.deleteDiscount(deleted);
     }
 }

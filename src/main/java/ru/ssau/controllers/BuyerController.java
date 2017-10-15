@@ -1,10 +1,12 @@
 package ru.ssau.controllers;
 
 import model.Buyer;
+import model.Discount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.BuyerService;
 
@@ -33,8 +35,9 @@ public class BuyerController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/deleteBuyer")
-    public void deleteBuyer(){
-        buyerService.removeBuyer(null);
+    public void deleteBuyer( @RequestParam(value = Buyer.ID_VALUE) Integer buyerId){
+        Buyer deleted = buyerService.getBuyerById(buyerId);
+        buyerService.removeBuyer(deleted);
     }
 
     //http://localhost:8080/crudGoods/index.html#/buyers

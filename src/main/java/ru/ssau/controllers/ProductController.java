@@ -3,9 +3,7 @@ package ru.ssau.controllers;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import service.ProductService;
 
 import java.util.List;
@@ -23,22 +21,32 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/saveProduct")//++
-    public void saveProduct(){
-        Product product = new Product("chocolate",12,"in");
+    public void saveProduct(
+            @RequestParam(value = Product.NAME_VALUE) String productName,
+            @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
+            @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
+
+        Product product = new Product(productName,unitCoast,unitName);
         productService.saveProducr(product);
         String s = "";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateProduct")
-    public void updateProduct(){
-        Product product = new Product(23,"qwe",12,"in");
+    public void updateProduct(@RequestParam(value = Product.ID_VALUE) Integer productId,
+                              @RequestParam(value = Product.NAME_VALUE) String productName,
+                              @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
+                              @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
+        Product product = productService.findProductById(productId);
+        product.setName(productName);
+        product.setUnitCoast(unitCoast);
+        product.setUnitName(unitName);
         productService.update(product);
         String s = "";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/removeProduct")
-    public void deleteProduct(){
-        Product product = new Product(19,"qwe",12,"in");
+    public void deleteProduct( @RequestParam(value = Product.NAME_VALUE) Integer productId){
+        Product product = productService.findProductById(productId);
         productService.delete(product);
         String s = "";
     }

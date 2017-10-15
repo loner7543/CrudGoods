@@ -16,6 +16,19 @@ import java.util.Set;
 @Table(name = "product")
 public class Product implements Serializable{
     private static final long serialVersionUID = -372011220359696447L;
+
+    @Transient
+    public static final String ID_VALUE = "id";
+
+    @Transient
+    public static final String NAME_VALUE = "name";
+
+    @Transient
+    public static final String UNIT_COAST_VALUE = "unitCoast";
+
+    @Transient
+    public static final String UNIT_NAME_VALUE = "unitName";
+
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")

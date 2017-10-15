@@ -7,8 +7,8 @@
     var vm = this;
 
     $scope.getAllBuyers = function () {
-      // var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
-      var promise = $http.get("../../data/buyers.json");
+      var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
+      // var promise = $http.get("../../data/buyers.json");
       promise.then(fulfilled, rejected)
     }
 
