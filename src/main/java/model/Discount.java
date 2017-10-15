@@ -28,7 +28,9 @@ public class Discount implements Serializable {
     @Transient
     public static final String ACTUAL_TO_VALUE = "actualTo";
 
+    @Transient
     public static final String AMOUNT_DISCOUNT_VALUE = "amountDiscount";
+
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")

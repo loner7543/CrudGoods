@@ -50,10 +50,4 @@ public class ProductController {
         productService.delete(product);
         String s = "";
     }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/get")//++
-    public @ResponseBody Product getProductById(){
-        Product product = productService.findProductById(24);
-        return product;
-    }
 }

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @SequenceGenerator(name = "SEQ_ID", sequenceName = "salesequence")
@@ -18,6 +17,20 @@ import java.util.Set;
 public class Sale implements Serializable {
 
     private static final long serialVersionUID = -1346203997433464035L;
+
+    @Transient
+    public static final String ID_VALUE = "id";
+
+    @Transient
+    public static final String ORDER_DATE_VALUE = "orderDate";
+
+    @Transient
+    public static final String DELIVERY_DATE_VALUE = "deliveryDate";
+
+    @Transient
+    public static final String AMOUNT_PRODUCT_VALUE = "amountProduct";
+
+
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")
