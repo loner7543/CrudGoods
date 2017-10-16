@@ -7,28 +7,32 @@
     var vm  =this;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
+    $scope.productName = '';
+    $scope.unitCoast = "";
+    $scope.unitName = "";
 
     $scope.modalShown = false;
 
     $scope.addItem = function() {// todo not tested
+      $scope.productName="";
       var data = {
         name:"ProductName",
         unitCoast:"5",
         unitName:"шт"
       };
-      $http({
-        method:"POST",
-        url:"localhost:8080/crudGoods/rest/saveProduct",
-        params:data
-      }).then(function () {
-       console.log("bla-bla")
-      }, function (result) {
-        console.error(result.data);
-      });
-      // ngDialog.open({ template: 'app/item/addItem.html',
-      //   className: 'ngdialog-theme-default',
-      //   scope: $scope
+      // $http({
+      //   method:"POST",
+      //   url:"localhost:8080/crudGoods/rest/saveProduct",
+      //   params:data
+      // }).then(function () {
+      //  console.log("bla-bla")
+      // }, function (result) {
+      //   console.error(result.data);
       // });
+      ngDialog.open({ template: 'app/item/addItem.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
     }
 
     $scope.sendRequest = function () {
@@ -63,7 +67,11 @@
     };
 
     $scope.editProductHandler = function () {
-      alert("edit1");
+      $scope.productName = "qwe";
+      ngDialog.open({ template: 'app/item/addItem.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
     };
 
     $scope.deleteProductHandler = function () {

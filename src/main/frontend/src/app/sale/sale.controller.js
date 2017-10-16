@@ -6,6 +6,9 @@
 
   function SaleController($scope, $http,ngDialog) {
     var vm = this;
+    $scope.orderDate="";
+    $scope.deliveryDate = "";
+    $scope.amountProduct="";
 
     $scope.getAllSells = function () {
       var promise = $http.get("../../data/sells.json");
@@ -26,6 +29,17 @@
         className: 'ngdialog-theme-default',
         scope: $scope
       });
+    };
+
+    $scope.editSale = function () {
+      ngDialog.open({ template: 'app/sale/addSaleDialog.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
+    }
+
+    $scope.deleteSale = function () {
+
     }
   }
 })();

@@ -6,6 +6,7 @@
 
   function DiscountController($scope, $http,UtilsFunctionsFactory,ngDialog) {
     var vm = this;
+    $scope.amountDiscount="";
     $scope.sendRequest = function () {
       var promise = $http.get("../../data/discounts.json");
       promise.then(fulfilled, rejected)
@@ -33,8 +34,15 @@
       });
     }
 
-    $scope.saveDiscount = function () {
-      console.log("bla")
+    $scope.editDiscount = function () {
+      ngDialog.open({ template: 'app/discount/addDiscount.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
+    }
+
+    $scope.deleteDiscount = function () {
+
     }
 
   }

@@ -3,12 +3,12 @@
   <table class="table table-hover">
     <thead>
     <tr>
-      <td>Фамилия</td>
-      <td>Имя</td>
-      <td>Отчество</td>
-      <td>Дата рождения</td>
-      <td>Телефонный номер</td>
-      <td>Адрес</td>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Дата рождения</th>
+      <th>Телефонный номер</th>
+      <th>Адрес</th>
     </tr>
     </thead>
     <tbody>
@@ -20,11 +20,12 @@
       <td>{{buyer.phoneNumber}}</td>
       <td>{{buyer.livingAddress}}</td>
       <td><button class="btn btn-primary" ng-click="showBuyerDialog()">Добавить покупателя</button></td>
+      <td><button ng-click="editBuyer()" class="btn btn-primary">Изменить покумателя</button></td>
+      <td><button ng-click="deleteBuyer()" class="btn btn-danger">Удалить покупателя</button></td>
     </tr>
     </tbody>
   </table>
   <button ng-click="getAllBuyers()">Загрузить покупателей</button>
 </div>
-<pop-up-dialog></pop-up-dialog>
 
 
