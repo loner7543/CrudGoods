@@ -16,7 +16,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getProducts")
+    @RequestMapping(method = RequestMethod.POST, value = "/getProducts")
     public @ResponseBody List<Product> getAllProducts(){
         List<Product> products =productService.getAll();
         return products;

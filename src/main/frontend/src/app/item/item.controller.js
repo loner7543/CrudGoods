@@ -3,8 +3,10 @@
     .module('frontend')
     .controller('ItemController', ItemController);
 
-  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state) {
+  /** @ngInject */
+  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state,allProducts) {
     var vm  =this;
+    $scope.items = allProducts.data;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
     $scope.productName = '';
