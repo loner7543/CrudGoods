@@ -13,26 +13,28 @@
 
     $scope.modalShown = false;
 
-    $scope.addItem = function() {// todo not tested
-      $scope.productName="";
+    $scope.addItem = function() {
+      //$scope.productName="";
       var data = {
         name:"ProductName",
-        unitCoast:"5",
+        unitCoast:"7",
         unitName:"шт"
       };
-      // $http({
-      //   method:"POST",
-      //   url:"localhost:8080/crudGoods/rest/saveProduct",
-      //   params:data
-      // }).then(function () {
-      //  console.log("bla-bla")
-      // }, function (result) {
-      //   console.error(result.data);
-      // });
-      ngDialog.open({ template: 'app/item/addItem.html',
-        className: 'ngdialog-theme-default',
-        scope: $scope
-      });
+       $http({
+         method:"POST",
+         url:"http://localhost:8080/crudGoods/rest/saveProduct",
+         params:data
+       }).then(function (resp) {
+         debugger;
+        console.log("resp", resp)
+       }, function (result) {
+         debugger;
+         console.error(result, result.data);
+       });
+      //ngDialog.open({ template: 'app/item/addItem.html',
+      //  className: 'ngdialog-theme-default',
+      //  scope: $scope
+      //});
     }
 
     $scope.sendRequest = function () {

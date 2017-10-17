@@ -2,6 +2,8 @@ package ru.ssau.controllers;
 
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.ProductService;
@@ -20,15 +22,15 @@ public class ProductController {
         return products;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/saveProduct")//++
-    public void saveProduct(
+    @RequestMapping(method = RequestMethod.POST, value = "/saveProduct")//++
+    public ResponseEntity saveProduct(
             @RequestParam(value = Product.NAME_VALUE) String productName,
             @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
             @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
 
         Product product = new Product(productName,unitCoast,unitName);
         productService.saveProducr(product);
-        String s = "";
+        return  ResponseEntity.ok(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateProduct")

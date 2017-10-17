@@ -20,34 +20,30 @@
   </tbody>
 </table>
 
-<button ng-click="sendRequest()">Загрузить  товары</button>
+<button ng-click="sendRequest()">Загрузить товары</button>
 <p><input type="checkbox" ng-model="showAddDiv"/>Показать скидки</p>
 
-<!--<button ng-click='toggleModal()'>Open dialog</button>-->
-<!--<modal-dialog show='modalShown' width='500px' height='60%'>-->
-  <!--<p>Содержимое модального окна<p>-->
-<!--</modal-dialog>-->
-
-
 <div ng-show="showAddDiv">
-<div>
-  <ul class="nav nav-tabs">
-    <li ng-repeat="discount in discountsMas" class="active">
-      <a href="#tab{{$index}}" data-toggle="tab">Скидка размером {{discount.amountDiscount}} %</a>
-    </li>
-    <!--<li class="active"><a href="#tab1" data-toggle="tab">Раздел 1</a></li>-->
-    <!--<li><a href="#tab2" data-toggle="tab">Раздел 2</a></li>-->
-  </ul>
+  <div>
+    <ul class="nav nav-tabs" ng-init="itemCtrl.currentIndex=0;">
+      <li ng-repeat="discount in discountsMas track by $index"
+          ng-class="{'active': $index === currentIndex}">
+          <a href="#tab{{$index}}" data-toggle="tab" ng-click="itemCtrl.currentIndex = $index;">Скидка размером {{discount.amountDiscount}} %</a>
+      </li>
+      <!--<li class="active"><a href="#tab1" data-toggle="tab">Раздел 1</a></li>-->
+      <!--<li><a href="#tab2" data-toggle="tab">Раздел 2</a></li>-->
+    </ul>
 
 
-  <div class="tab-content">
-    <div  ng-repeat="discount in discountsMas" class="tab-pane active" id="tab{{$index}}">
-      <div>
-        <p>Действует с  {{discount.actualFrom}} </p>
-        <p>Действует по {{discount.actualTo}} </p>
-        <p>Величина скидки  {{discount.amountDiscount}} %</p>
+    <div class="tab-content">
+      <div ng-repeat="discount in discountsMas track by $index" class="tab-pane" id="tab{{$index}}"
+           ng-class="{'active': $index === itemCtrl.currentIndex}">
+        <div>
+          <p>Действует с {{discount.actualFrom}} </p>
+          <p>Действует по {{discount.actualTo}} </p>
+          <p>Величина скидки {{discount.amountDiscount}} %</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
