@@ -33,7 +33,8 @@ public class ProductController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/updateProduct")
+    // todo  Product передать через body запросом На клиенте его в body
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct")
     public void updateProduct(@RequestParam(value = Product.ID_VALUE) Integer productId,
                               @RequestParam(value = Product.NAME_VALUE) String productName,
                               @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,

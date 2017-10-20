@@ -18,13 +18,13 @@
            }
          },
          resolve: {
-           allProducts: function ($http) {
-             return $http({
-               method: "POST",
-               url: "http://localhost:8080/crudGoods/rest/getProducts",
-               params:{}
-             });
-           }
+           // allProducts: function ($http) {
+           //   return $http({
+           //     method: "POST",
+           //     url: "http://localhost:8080/crudGoods/rest/getProducts",
+           //     params:{}
+           //   });
+           // }
          }
        })
        .state('buyers', {

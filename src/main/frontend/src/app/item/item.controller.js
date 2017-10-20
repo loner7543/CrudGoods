@@ -4,9 +4,9 @@
     .controller('ItemController', ItemController);
 
   /** @ngInject */
-  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state,allProducts) {
+  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state/*allProducts*/) {
     var vm  =this;
-    $scope.items = allProducts.data;
+    // $scope.items = allProducts.data;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
     $scope.productName = '';
