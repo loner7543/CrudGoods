@@ -20,8 +20,12 @@
       function fulfilled(response) {
         console.log(response);
         for (var i = 0;i<response.data.length;i++){
+          var orderDate = UtilsFunctionsFactory.toDate(response.data[i].sale.orderDate);// из продажи
+          var deliveryDate = UtilsFunctionsFactory.toDate(response.data[i].sale.deliveryDate);// из продажи
           var formattedBirthDate = UtilsFunctionsFactory.toDate(response.data[i].birthDate);
           response.data[i].birthDate = formattedBirthDate;
+          response.data[i].sale.orderDate = orderDate;
+          response.data[i].sale.deliveryDate = deliveryDate;
         }
         $scope.sellers = response.data;
       }

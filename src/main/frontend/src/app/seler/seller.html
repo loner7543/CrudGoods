@@ -9,6 +9,7 @@
       <th>Дата рождения</th>
       <th>Email</th>
       <th>Адрес доставки</th>
+      <th>Период продаж</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +20,7 @@
       <td>{{seller.birthDate}}</td>
       <td>{{seller.email}}</td>
       <td>{{seller.deliveryAddress}}</td>
+      <td>c {{seller.sale.orderDate}} по {{seller.sale.deliveryDate}}</td>
       <td>
         <button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
       </td>
