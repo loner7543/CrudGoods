@@ -10,7 +10,21 @@
   function UtilsFunctionsFactory() {
     return{
       toDate:function (value) {
-        return new Date(value).toDateString()
+        var dateValue = new Date(value);
+        var dd = dateValue.getDate();
+        var mm = dateValue.getMonth()+1; //January is 0!
+
+        var yyyy = dateValue.getFullYear();
+        if(dd<10){
+          dd='0'+dd;
+        }
+        if(mm<10){
+          mm='0'+mm;
+        }
+        var formattedDate = dd+'.'+mm+'.'+yyyy;
+        return formattedDate;
+        // moment.lang('ru');
+        // return moment(value).format('dddd, MMMM DD YYYY')
       }
     }
   }

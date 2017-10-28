@@ -3,6 +3,7 @@
     .module('frontend')
     .controller('BuyerController', BuyerController)
 
+  /** @ngInject */
   function BuyerController($scope, $http,$interval, $location,ngDialog,UtilsFunctionsFactory) {
     var vm = this;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
@@ -22,7 +23,12 @@
     }
 
     function fulfilled(response){
-      console.log(response);
+      var buyersMas = response.data;
+      console.log(response.data);
+      for (var i = 0;i<response.data.length;i++){
+        var formattedBirthDate = UtilsFunctionsFactory.toDate(response.data[i].birthDate);
+        response.data[i].birthDate = formattedBirthDate;
+      }
       $scope.buyres = response.data;
       var discountMas = [];
       for(var i = 0;i<$scope.buyres.length;i++){

@@ -3,7 +3,8 @@
     .module('frontend')
     .controller('SellersController', SellersController);
 
-  function SellersController($scope, $http,ngDialog) {
+  /** @ngInject */
+  function SellersController($scope, $http,ngDialog,UtilsFunctionsFactory) {
     var vm = this;
     $scope.sellerFirstName = "";
     $scope.sellerMiddleName="";
@@ -18,6 +19,10 @@
 
       function fulfilled(response) {
         console.log(response);
+        for (var i = 0;i<response.data.length;i++){
+          var formattedBirthDate = UtilsFunctionsFactory.toDate(response.data[i].birthDate);
+          response.data[i].birthDate = formattedBirthDate;
+        }
         $scope.sellers = response.data;
       }
 
