@@ -42,9 +42,9 @@
     ],
     "buyer": {
       "id": 2,
-      "firstName": "fn",
-      "middleName": "mn",
-      "lastName": "ln",
+      "firstName": "Гавриков",
+      "middleName": "Семён",
+      "lastName": "Семёнович",
       "birthDate": 1305489600000,
       "phoneNumber": "88--22",
       "livingAddress": "add",

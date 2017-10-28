@@ -10,6 +10,7 @@
     $scope.orderDate="";
     $scope.deliveryDate = "";
     $scope.amountProduct="";
+    $scope.showAddDiv = false;
 
     $scope.getAllSells = function () {
       var promise = $http.get("../../data/sells.json");
@@ -25,6 +26,15 @@
         response.data[i].deliveryDate = formattedDeliveryDate;
       }
       $scope.sales = response.data;
+      var products = [];
+      for (var i= 0;i<$scope.sales.length;i++){
+        var productsS = $scope.sales[i].products;
+        console.log(productsS);
+        for(var j =0;j<productsS.length;j++){
+          products.unshift(productsS[j]);
+        }
+      }
+      $scope.salesProducts = products;
     }
 
     function rejected(err) {
@@ -47,6 +57,10 @@
 
     $scope.deleteSale = function () {
 
+    }
+
+    $scope.showAddDiv = function () {
+      this.showAddDiv = !this.showAddDiv;
     }
   }
 })();
