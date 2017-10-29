@@ -3,6 +3,8 @@ package ru.ssau.controllers;
 import model.Discount;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +28,7 @@ public class DiscountController {
         return discounts;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/addDiscount")
+    @RequestMapping(method = RequestMethod.POST, value = "/addDiscount")
     public void addNewDiscount(@RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
                                @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
                                @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount){
@@ -35,7 +37,7 @@ public class DiscountController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateDiscount")
-    public void updateDiscount(
+    public ResponseEntity updateDiscount(
                                 @RequestParam(value = Discount.ID_VALUE) Integer discountId,
                                 @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long newActualFromDate,
                                 @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long newActualToDate,
@@ -45,11 +47,13 @@ public class DiscountController {
         updated.setActualTo(new Date(newActualToDate));
         updated.setAmountDiscount(newAmountDiscount);
         discountService.updateDiscount(updated);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/deleteDiscount")
-    public void deleteDiscount( @RequestParam(value = Discount.ID_VALUE) Integer discountId){
+    public ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
         Discount deleted = discountService.findDiscountById(discountId);
         discountService.deleteDiscount(deleted);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

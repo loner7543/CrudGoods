@@ -30,12 +30,12 @@ public class ProductController {
 
         Product product = new Product(productName,unitCoast,unitName);
         productService.saveProducr(product);
-        return  ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     // todo  Product передать через body запросом На клиенте его в body
     @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct")
-    public void updateProduct(@RequestParam(value = Product.ID_VALUE) Integer productId,
+    public ResponseEntity updateProduct(@RequestParam(value = Product.ID_VALUE) Integer productId,
                               @RequestParam(value = Product.NAME_VALUE) String productName,
                               @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
                               @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
@@ -44,13 +44,13 @@ public class ProductController {
         product.setUnitCoast(unitCoast);
         product.setUnitName(unitName);
         productService.update(product);
-        String s = "";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/removeProduct")
-    public void deleteProduct( @RequestParam(value = Product.NAME_VALUE) Integer productId){
+    public ResponseEntity deleteProduct( @RequestParam(value = Product.NAME_VALUE) Integer productId){
         Product product = productService.findProductById(productId);
         productService.delete(product);
-        String s = "";
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

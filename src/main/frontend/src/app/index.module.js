@@ -25,6 +25,16 @@
         return formattedDate;
         // moment.lang('ru');
         // return moment(value).format('dddd, MMMM DD YYYY')
+      },
+      getAllDiscounts:function () {
+        var _amount = 10;
+        return {
+          setAmount: function (amount) {
+            _amount = amount;
+          },
+          getAmount: function () {
+            return _amount;
+          }
       }
     }
   }
@@ -32,3 +42,6 @@
 
 })();
 //http://dotansimha.github.io/angularjs-dropdown-multiselect/docs/#/main
+//https://www.youtube.com/watch?v=2tx1B8zXNqo
+//http://stepansuvorov.com/blog/2014/09/angularjs-data-transfer/
+//http://jsfiddle.net/STEVER/9a2sLdy6/

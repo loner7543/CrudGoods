@@ -43,7 +43,7 @@
              ng-class="{'active': $index === saleCtrl.currentIndex}">
           <div>
             <p>Название  {{product.name}} </p>
-            <p>Стоимость  {{product.unitCoast}} </p>
+            <p>Стоимость  {{product.unitCoast|currency }} </p>
             <p>Ед. измерения  {{product.unitName}}</p>
           </div>
         </div>

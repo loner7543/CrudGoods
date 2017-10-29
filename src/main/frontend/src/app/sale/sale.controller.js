@@ -35,6 +35,13 @@
         }
       }
       $scope.salesProducts = products;
+
+      var buyers = [];
+      for (var i= 0;i<$scope.sales.length;i++){
+        var buyer = $scope.sales[i].buyer;
+        buyers.unshift(buyer);
+      }
+      $scope.salesBuyers = buyers;// все покупатели со всех продаж
     }
 
     function rejected(err) {
