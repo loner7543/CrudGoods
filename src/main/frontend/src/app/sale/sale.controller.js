@@ -5,8 +5,9 @@
     .controller('SaleController', SaleController);
 
   /** @ngInject */
-  function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory) {
+  function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory,allSells) {
     var vm = this;
+    $scope.sales = allSells.data;
     $scope.orderDate="";
     $scope.deliveryDate = "";
     $scope.amountProduct="";

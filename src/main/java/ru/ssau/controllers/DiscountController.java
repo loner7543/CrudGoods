@@ -22,7 +22,7 @@ public class DiscountController {
     @Autowired
     private DiscountService discountService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getDiscounts")
+    @RequestMapping(method = RequestMethod.POST, value = "/getDiscounts")
     public @ResponseBody List<Discount> getAddDiscounts(){
         List<Discount> discounts = discountService.getAllDisc();
         return discounts;

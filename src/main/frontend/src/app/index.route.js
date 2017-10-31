@@ -18,13 +18,13 @@
            }
          },
          resolve: {
-           // allProducts: function ($http) {
-           //   return $http({
-           //     method: "POST",
-           //     url: "http://localhost:8080/crudGoods/rest/getProducts",
-           //     params:{}
-           //   });
-           // }
+           allProducts: function ($http) {
+             return $http({
+               method: "POST",
+               url: "http://localhost:8080/crudGoods/rest/getProducts",
+               params:{}
+             });
+           }
          }
        })
        .state('buyers', {
@@ -36,7 +36,15 @@
            controllerAs: 'buyerCtrl'
          }
        },
-       resolve: {}
+       resolve: {
+         allBuyers: function ($http) {
+           return $http({
+             method: "POST",
+             url: "http://localhost:8080/crudGoods/rest/getAllBuyers",
+             params:{}
+           });
+         }
+       }
      })
        .state('discounts', {
        url: '/discounts',
@@ -47,7 +55,15 @@
            controllerAs: 'discountCtrl'
          }
        },
-       resolve: {}
+       resolve: {
+         allDiscounts: function ($http) {
+           return $http({
+             method: "POST",
+             url: "http://localhost:8080/crudGoods/rest/getDiscounts",
+             params:{}
+           });
+         }
+       }
      })
        .state('sales', {
          url: '/sales',
@@ -58,7 +74,15 @@
              controllerAs: 'saleCtrl'
            }
          },
-         resolve: {}
+         resolve: {
+           allSells: function ($http) {
+             return $http({
+               method: "POST",
+               url: "http://localhost:8080/crudGoods/rest/getAllSells",
+               params:{}
+             });
+           }
+         }
        })
        .state('sellers', {
          url: '/sellers',
@@ -69,7 +93,17 @@
              controllerAs: 'sellerCtrl'
            }
          },
-         resolve: {}
+         resolve: {
+           resolve: {
+             allSellers: function ($http) {
+               return $http({
+                 method: "POST",
+                 url: "http://localhost:8080/crudGoods/rest/getAllSellers",
+                 params:{}
+               });
+             }
+           }
+         }
        });
 
     $urlRouterProvider.otherwise(function ($injector, $location) {

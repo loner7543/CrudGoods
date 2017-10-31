@@ -4,8 +4,9 @@
     .controller('SellersController', SellersController);
 
   /** @ngInject */
-  function SellersController($scope, $http,ngDialog,UtilsFunctionsFactory) {
+  function SellersController($scope, $http,ngDialog,UtilsFunctionsFactory,allSellers) {
     var vm = this;
+    $scope.sellers = allSellers.data;
     $scope.sellerFirstName = "";
     $scope.sellerMiddleName="";
     $scope.sellerLastName="";

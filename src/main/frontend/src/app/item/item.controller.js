@@ -4,9 +4,9 @@
     .controller('ItemController', ItemController);
 
   /** @ngInject */
-  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state/*allProducts*/) {
+  function ItemController($scope,$http,UtilsFunctionsFactory,ngDialog,$state,allProducts) {
     var vm  =this;
-    // $scope.items = allProducts.data;
+     $scope.items = allProducts.data;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     $scope.showAddDiv = false;
     $scope.productName = '';
@@ -16,9 +16,12 @@
     $scope.modalShown = false;
 
     $scope.addItem = function() {
-      //$scope.productName="";
+      ngDialog.open({ template: 'app/item/addItem.html',
+       className: 'ngdialog-theme-default',
+       scope: $scope
+      });
       var data = {
-        name:"ProductName",
+        name: $scope.productName,
         unitCoast:"7",
         unitName:"шт"
       };
@@ -33,10 +36,6 @@
          debugger;
          console.error(result, result.data);
        });
-      //ngDialog.open({ template: 'app/item/addItem.html',
-      //  className: 'ngdialog-theme-default',
-      //  scope: $scope
-      //});
     }
 
     $scope.sendRequest = function () {

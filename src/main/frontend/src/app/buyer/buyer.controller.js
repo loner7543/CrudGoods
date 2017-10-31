@@ -4,9 +4,10 @@
     .controller('BuyerController', BuyerController)
 
   /** @ngInject */
-  function BuyerController($scope, $http,$interval, $location,ngDialog,UtilsFunctionsFactory) {
+  function BuyerController($scope, $http,$interval, $location,ngDialog,UtilsFunctionsFactory,allBuyers) {
     var vm = this;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
+    $scope.buyres = allBuyers.data;
     $scope.firstName = "";
     $scope.middleName = "";
     $scope.lastName = "";
@@ -17,7 +18,7 @@
     $scope.showAddDiv = false;
 
     $scope.getAllBuyers = function () {
-     // var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
+      var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
        var promise = $http.get("../../data/buyers.json");
       promise.then(fulfilled, rejected)
     }

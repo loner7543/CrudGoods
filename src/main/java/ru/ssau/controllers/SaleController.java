@@ -20,7 +20,7 @@ public class SaleController {
     @Autowired
     private SaleService saleService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getAllSells")
+    @RequestMapping(method = RequestMethod.POST, value = "/getAllSells")
     public  @ResponseBody List<Sale> getAllSells(){
         return saleService.getAllSells();
     }

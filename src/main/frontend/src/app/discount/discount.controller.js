@@ -5,8 +5,9 @@
     .controller('DiscountController', DiscountController);
 
   /** @ngInject */
-  function DiscountController($scope, $http,UtilsFunctionsFactory,ngDialog) {
+  function DiscountController($scope, $http,UtilsFunctionsFactory,ngDialog,allDiscounts) {
     var vm = this;
+    $scope.discounts = allDiscounts.data;
     $scope.amountDiscount="";
     $scope.sendRequest = function () {
       var promise = $http.get("../../data/discounts.json");
@@ -21,7 +22,7 @@
         resp.data[i].actualTo = formattedToDate;
         resp.data[i].actualFrom = formattedFromDate;
       }
-      $scope.discounts = resp.data;
+      //$scope.discounts = resp.data;
     }
 
     function rejected(errror) {
