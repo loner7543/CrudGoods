@@ -7,47 +7,37 @@
   /** @ngInject */
   function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory,allSells) {
     var vm = this;
+    for (var i = 0;i<allSells.data.length;i++){
+      var formattedOrderDate = UtilsFunctionsFactory.toDate(allSells.data[i].orderDate);
+      var formattedDeliveryDate = UtilsFunctionsFactory.toDate(allSells.data[i].deliveryDate);
+      allSells.data[i].orderDate = formattedOrderDate;
+      allSells.data[i].deliveryDate = formattedDeliveryDate;
+    }
     $scope.sales = allSells.data;
+
+    var products = [];
+    for (var i= 0;i<$scope.sales.length;i++){
+      var productsS = $scope.sales[i].products;
+      console.log(productsS);
+      for(var j =0;j<productsS.length;j++){
+        products.unshift(productsS[j]);
+      }
+    }
+    $scope.salesProducts = products;
+
+    var buyers = [];
+    for (var i= 0;i<$scope.sales.length;i++){
+      var buyer = $scope.sales[i].buyer;
+      buyers.unshift(buyer);
+    }
+    $scope.salesBuyers = buyers;// все покупатели со всех продаж
+
+    /*свойства для диалога*/
     $scope.orderDate="";
     $scope.deliveryDate = "";
     $scope.amountProduct="";
     $scope.showAddDiv = false;
 
-    $scope.getAllSells = function () {
-      var promise = $http.get("../../data/sells.json");
-      promise.then(fulfilled, rejected)
-    };
-
-    function fulfilled(response) {
-      console.log(response);
-      for (var i = 0;i<response.data.length;i++){
-        var formattedOrderDate = UtilsFunctionsFactory.toDate(response.data[i].orderDate);
-        var formattedDeliveryDate = UtilsFunctionsFactory.toDate(response.data[i].deliveryDate);
-        response.data[i].orderDate = formattedOrderDate;
-        response.data[i].deliveryDate = formattedDeliveryDate;
-      }
-      $scope.sales = response.data;
-      var products = [];
-      for (var i= 0;i<$scope.sales.length;i++){
-        var productsS = $scope.sales[i].products;
-        console.log(productsS);
-        for(var j =0;j<productsS.length;j++){
-          products.unshift(productsS[j]);
-        }
-      }
-      $scope.salesProducts = products;
-
-      var buyers = [];
-      for (var i= 0;i<$scope.sales.length;i++){
-        var buyer = $scope.sales[i].buyer;
-        buyers.unshift(buyer);
-      }
-      $scope.salesBuyers = buyers;// все покупатели со всех продаж
-    }
-
-    function rejected(err) {
-      console.log(err);
-    }
 
     $scope.addNewSale = function () {
       ngDialog.open({ template: 'app/sale/addSaleDialog.html',
@@ -55,6 +45,28 @@
         scope: $scope
       });
     };
+
+    $scope.dialogOkClickHandler = function () {
+      // debugger;
+      // var data = {
+      //   name: $scope.productName,
+      //   unitCoast:"7",
+      //   unitName:"шт"
+      // };
+      // $http({
+      //   method: "POST",
+      //   url: "http://localhost:8080/crudGoods/rest/saveProduct",
+      //   params: data
+      // }).then(function (resp) {
+      //     debugger;
+      //     console.log("Success resp1", resp)
+      //     $state.reload();
+      //   },
+      //   function (result) {
+      //     debugger;
+      //     console.error(result, result.data);
+      //   });
+    }
 
     $scope.editSale = function () {
       ngDialog.open({ template: 'app/sale/addSaleDialog.html',

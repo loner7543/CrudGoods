@@ -6,7 +6,19 @@
   /** @ngInject */
   function SellersController($scope, $http,ngDialog,UtilsFunctionsFactory,allSellers) {
     var vm = this;
+
+    for (var i = 0;i<allSellers.data.length;i++){
+      var orderDate = UtilsFunctionsFactory.toDate(allSellers.data[i].sale.orderDate);// из продажи
+      var deliveryDate = UtilsFunctionsFactory.toDate(allSellers.data[i].sale.deliveryDate);// из продажи
+      var formattedBirthDate = UtilsFunctionsFactory.toDate(response.data[i].birthDate);
+      allSellers.data[i].birthDate = formattedBirthDate;
+      allSellers.data[i].sale.orderDate = orderDate;
+      allSellers.data[i].sale.deliveryDate = deliveryDate;
+    }
+
     $scope.sellers = allSellers.data;
+
+    /*для диалога*/
     $scope.sellerFirstName = "";
     $scope.sellerMiddleName="";
     $scope.sellerLastName="";
@@ -20,15 +32,6 @@
 
       function fulfilled(response) {
         console.log(response);
-        for (var i = 0;i<response.data.length;i++){
-          var orderDate = UtilsFunctionsFactory.toDate(response.data[i].sale.orderDate);// из продажи
-          var deliveryDate = UtilsFunctionsFactory.toDate(response.data[i].sale.deliveryDate);// из продажи
-          var formattedBirthDate = UtilsFunctionsFactory.toDate(response.data[i].birthDate);
-          response.data[i].birthDate = formattedBirthDate;
-          response.data[i].sale.orderDate = orderDate;
-          response.data[i].sale.deliveryDate = deliveryDate;
-        }
-        $scope.sellers = response.data;
       }
 
       function rejected(err) {

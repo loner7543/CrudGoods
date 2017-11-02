@@ -33,7 +33,7 @@ public class BuyerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/addBuyer")
+    @RequestMapping(method = RequestMethod.POST, value = "/addBuyer")
     public ResponseEntity addBuyer(@RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
                          @RequestParam(value = Buyer.MIDDLE_NAME_VALUE) String middleName,
                          @RequestParam(value = Buyer.LAST_NAME_VALUE) String lastName,

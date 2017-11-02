@@ -29,11 +29,12 @@ public class DiscountController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addDiscount")
-    public void addNewDiscount(@RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
+    public ResponseEntity addNewDiscount(@RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
                                @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
                                @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount){
         Discount discount = new Discount(new Date(actualFrom),new Date(actualTo),amountDiscount,null,null);
         discountService.addDiscount(discount);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/updateDiscount")
