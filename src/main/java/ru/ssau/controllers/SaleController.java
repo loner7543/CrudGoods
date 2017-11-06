@@ -1,12 +1,13 @@
 package ru.ssau.controllers;
 
+import model.Buyer;
 import model.Sale;
-import model.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import service.BuyerService;
 import service.SaleService;
 
 import java.util.Date;
@@ -20,17 +21,28 @@ public class SaleController {
     @Autowired
     private SaleService saleService;
 
+    @Autowired
+    private BuyerService buyerService;
+
     @RequestMapping(method = RequestMethod.POST, value = "/getAllSells")
     public  @ResponseBody List<Sale> getAllSells(){
         return saleService.getAllSells();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addSale")
-    public ResponseEntity addSale(@RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
-                        @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
-                        @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct){
-        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,null,null);
-        saleService.addSale(sale);
+    public ResponseEntity<Throwable> addSale(@RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
+                                             @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
+                                             @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
+                                             @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId) {
+        Buyer selectedBuyer = buyerService.getBuyerById(buyerId);
+        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,null,selectedBuyer);
+        try {
+            saleService.addSale(sale);
+        }
+        catch (Throwable e){
+         return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -43,10 +55,15 @@ public class SaleController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/deleteSale")
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteSale")
     public ResponseEntity deleteSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId){
-        Sale deletedSale = saleService.getSaleById(saleId);
-        saleService.deleteSale(deletedSale);
+        try{
+            Sale deletedSale = saleService.getSaleById(saleId);
+            saleService.deleteSale(deletedSale);
+        }
+        catch (Throwable ex){
+            return new ResponseEntity(ex,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -51,10 +51,16 @@ public class DiscountController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/deleteDiscount")
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteDiscount")
     public ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
         Discount deleted = discountService.findDiscountById(discountId);
-        discountService.deleteDiscount(deleted);
+        try{
+            discountService.deleteDiscount(deleted);
+        }
+        catch (Throwable e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         return new ResponseEntity(HttpStatus.OK);
     }
 }

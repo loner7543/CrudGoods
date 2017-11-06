@@ -15,19 +15,31 @@
     }
     $scope.discounts = allDiscounts.data;
 
-    $scope.amountDiscount="";
+    $scope.discountParams={
+      actualFrom:"",
+      actualTo:"",
+      amountDiscount:""// даты - строки!
+    };
 
     $scope.addDiscount = function() {
+      ngDialog.open({ template: 'app/discount/addDiscount.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
+    }
 
-      var discount = {
-        actualFrom: 1122,
-        actualTo:12223,
-        amountDiscount:50
-      };
+    $scope.discountOkClickHandler = function () {
+      debugger;
+      var newDiscount = {
+        actualFrom:UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom),
+        actualTo:UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo),
+        amountDiscount:$scope.discountParams.amountDiscount
+      }
+      console.log(newDiscount);
       $http({
         method: "POST",
         url: "http://localhost:8080/crudGoods/rest/addDiscount",
-        params: discount
+        params:  newDiscount
       }).then(function (resp) {
           debugger;
           console.log("Success resp", resp)
@@ -37,14 +49,9 @@
           debugger;
           console.error(result, result.data);
         });
-
-      ngDialog.open({ template: 'app/discount/addDiscount.html',
-        className: 'ngdialog-theme-default',
-        scope: $scope
-      });
     }
 
-    $scope.discountOkClickHandler = function () {
+    $scope.discountCancelClicHandler = function () {
 
     }
 
@@ -55,8 +62,24 @@
       });
     }
 
-    $scope.deleteDiscount = function () {
-
+    $scope.deleteDiscount = function (scope) {
+      debugger;
+      var deletedId = scope.discount.id;
+      $http({
+        method: "POST", // todo change method type
+        url: "http://localhost:8080/crudGoods/rest/deleteDiscount",
+        params: {
+          id:deletedId
+        }
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result);
+        });
     }
 
   }

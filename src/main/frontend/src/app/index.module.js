@@ -30,6 +30,11 @@
         // moment.lang('ru');
         // return moment(value).format('dddd, MMMM DD YYYY')
       },
+
+      dateStringToMillis:function(date){
+          var time = new Date(date).getTime();
+          return isNaN(time) ? null : time;
+      },
       getAllDiscounts:function () {
         var _amount = 10;
         return {

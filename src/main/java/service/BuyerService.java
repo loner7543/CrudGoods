@@ -43,6 +43,6 @@ public class BuyerService {
 
     @Transactional
     public void removeBuyer(Buyer buyer){
-        entityManager.remove(buyer);
+        entityManager.remove(entityManager.contains(buyer) ? buyer : entityManager.merge(buyer));
     }
 }

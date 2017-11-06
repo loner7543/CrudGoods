@@ -30,6 +30,9 @@ public class Sale implements Serializable {
     @Transient
     public static final String AMOUNT_PRODUCT_VALUE = "amountProduct";
 
+    @Transient
+    public static final String SELECTED_BUYER_ID = "selectedBuyer";
+
 
     @Id
     @GeneratedValue(generator = "SEQ_ID")

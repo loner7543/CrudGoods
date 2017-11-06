@@ -9,13 +9,14 @@
   </thead>
   <tbody>
   <tr ng-repeat="item in items">
+    <td class="hideId">{{item.id}}</td>
     <td>{{item.name}}</td>
     <td>{{item.unitCoast|currency }}</td>
     <td>{{item.unitName}}</td>
     <td>
       <button ng-click="addItem()" class="btn btn-primary">Добавить товар</button>
-      <button ng-click="editProductHandler() " id="editBtn" class="btn btn-primary">Изменить товар</button>
-      <button ng-click="editProductHandler()" class="btn btn-danger">Удалить товар</button>
+      <button ng-click="editProductHandler(this) " id="editBtn" class="btn btn-primary">Изменить товар</button>
+      <button ng-click="deleteProductHandler(this)" class="btn btn-danger">Удалить товар</button>
     </td>
   </tr>
   </tbody>

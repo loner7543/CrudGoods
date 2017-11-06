@@ -20,11 +20,15 @@
         discountMas.unshift(discounts[j])
       }
     }
-    $scope.discountsMas=discountMas
-    $scope.showAddDiv = false;
-    $scope.productName = '';
-    $scope.unitCoast = "";
-    $scope.unitName = "";
+
+    $scope.discountsMas= discountMas
+    $scope.showAddDiv=false
+
+    $scope.params = {
+      name: "",
+      unitCoast: "",
+      unitName: ""
+    };
 
     $scope.modalShown = false;
 
@@ -35,17 +39,36 @@
       });
     }
 
-    $scope.dialogOkHandler = function () {
+    $scope.editOkHandler = function () {
       debugger;
-      var data = {
-        name: $scope.productName,
-        unitCoast:"7",
-        unitName:"шт"
-      };
+      console.log( $scope.params);
+      $scope.params.id=1;
+      var data = $scope.params
+      $http({
+        method: "PUT",
+        url: "http://localhost:8080/crudGoods/rest/updateProduct",
+        data:  $scope.params
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
+    }
+
+    /*
+    * Создание нового товара
+    * */
+    $scope.dialogOkHandler = function () {
+      console.log( $scope.params);
+      var dataObj =$scope.params;
       $http({
         method: "POST",
         url: "http://localhost:8080/crudGoods/rest/saveProduct",
-        params: data
+        params: dataObj
       }).then(function (resp) {
           debugger;
           console.log("Success resp1", resp)
@@ -61,21 +84,38 @@
 
     }
 
-    $scope.editProductHandler = function () {
-      $scope.productName = "qwe";
-      ngDialog.open({ template: 'app/item/addItem.html',
+    $scope.editProductHandler = function (scope) {
+      console.log(scope);
+      $scope.params.name=scope.item.name;
+      $scope.params.unitCoast = scope.item.unitCoast;
+      $scope.params.unitName=scope.item.unitName;
+
+      ngDialog.open({ template: 'app/item/editProduct.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
     };
 
-    $scope.deleteProductHandler = function () {
-      alert("delete")
+    $scope.deleteProductHandler = function (scope) {
+      var deletedId= scope.item.id;
+      console.log(deletedId);
+      $http({
+        method: "POST", // todo change method type
+        url: "http://localhost:8080/crudGoods/rest/removeProduct",
+        params: {
+          id:deletedId
+        }
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result);
+        });
     }
 
-    $scope.rowClick = function () {
-      alert("dedede");
-    }
 
     $scope.showHide1 = function () {
       this.showAddDiv = !this.showAddDiv;

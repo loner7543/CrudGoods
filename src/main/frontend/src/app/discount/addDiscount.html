@@ -1,10 +1,14 @@
 <div>
-  <h3>Цена товара</h3>
-<input type="text" placeholder="Введите размер скидки" ng-model="amountDiscount">
+  <h3>Дата начала</h3>
+  <input type="text" placeholder="Введите дату начала скидки" ng-model="discountParams.actualFrom"  mask="99.99.9999">
+  <h3>Дата окончания</h3>
+  <input type="text" placeholder="Введите дату окончания скидки" ng-model="discountParams.actualTo"  mask="99.99.9999">
+  <h3>Размер скидки</h3>
+<input type="text" placeholder="Введите размер скидки" ng-model="discountParams.amountDiscount">
   <h3>Выберите покупателя</h3>
   <select id="buyrsList"></select>
   <h3>Выберите товар</h3>
   <select id="productList"></select><br>
-  <button class="btn btn-primary" ng-click="saveDiscount() && closeThisDialog('Some value')">Добавить</button>
+  <button class="btn btn-primary" ng-click="discountOkClickHandler()">Добавить</button>
   <button class="btn btn-danger">Отмена</button>
 </div>

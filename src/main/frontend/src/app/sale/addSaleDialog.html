@@ -1,11 +1,11 @@
 <div>
   <h3>Дата заказа</h3>
-  <input type="text" mask="99.99.9999" placeholder="Введите дату заказа" ng-model="orderDate">
+  <input type="text" mask="99.99.9999" placeholder="Введите дату заказа" ng-model="saleParams.orderDate">
   <h3>Дата поставки</h3>
-  <input type="text" mask="99.99.9999" placeholder="Введите дату доставки" ng-model="deliveryDate">
+  <input type="text" mask="99.99.9999" placeholder="Введите дату доставки" ng-model="saleParams.deliveryDate">
   <h3>Количество продукта</h3>
-  <input type="text" ng-model="amountProduct" placeholder="Введите количество продукта"><br>
-  <h3>Выберите продукты</h3>
+  <input type="text" ng-model="saleParams.amountProduct" placeholder="Введите количество продукта"><br>
+ <!-- <h3>Выберите продукты</h3>
 
   <div class="hideScroll">
     <select name="productSelect" ng-model="selectedProducts" multiple>
@@ -13,10 +13,10 @@
               ng-value="option.id" class="panel panel-primary">{{option.name}}
       </option>
     </select>
-  </div>
+  </div>-->
   <h3>Выберите покупателя</h3>
 
-  <select name="buyerSelect" ng-model="selectedBuyer">
+  <select name="buyerSelect" ng-model="saleParams.selectedBuyer">
     <option ng-repeat="option in salesBuyers"
             ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.lastName}}</option>
   </select><br>

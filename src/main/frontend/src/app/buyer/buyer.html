@@ -20,8 +20,8 @@
       <td>{{buyer.phoneNumber}}</td>
       <td>{{buyer.livingAddress}}</td>
       <td><button class="btn btn-primary" ng-click="showBuyerDialog()">Добавить покупателя</button></td>
-      <td><button ng-click="editBuyer()" class="btn btn-primary">Изменить покумателя</button></td>
-      <td><button ng-click="deleteBuyer()" class="btn btn-danger">Удалить покупателя</button></td>
+      <td><button ng-click="editBuyer(this)" class="btn btn-primary">Изменить покупателя</button></td>
+      <td><button ng-click="deleteBuyer(this)" class="btn btn-danger">Удалить покупателя</button></td>
     </tr>
     </tbody>
   </table>

@@ -46,6 +46,6 @@ public class DiscountService {
 
     @Transactional
     public void deleteDiscount(Discount discount){
-        entityManager.remove(discount);
+        entityManager.remove(entityManager.contains(discount) ? discount : entityManager.merge(discount));
     }
 }

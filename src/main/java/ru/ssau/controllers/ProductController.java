@@ -35,20 +35,17 @@ public class ProductController {
 
     // todo  Product передать через body запросом На клиенте его в body
     @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct")
-    public ResponseEntity updateProduct(@RequestParam(value = Product.ID_VALUE) Integer productId,
-                              @RequestParam(value = Product.NAME_VALUE) String productName,
-                              @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
-                              @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
-        Product product = productService.findProductById(productId);
-        product.setName(productName);
-        product.setUnitCoast(unitCoast);
-        product.setUnitName(unitName);
+    public ResponseEntity updateProduct(@RequestBody Product newProduct){
+        Product product = productService.findProductById(newProduct.getId());
+//        product.setName(productName);
+//        product.setUnitCoast(unitCoast);
+//        product.setUnitName(unitName);
         productService.update(product);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/removeProduct")
-    public ResponseEntity deleteProduct( @RequestParam(value = Product.NAME_VALUE) Integer productId){
+    @RequestMapping(method = RequestMethod.POST, value = "/removeProduct")
+    public ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
         Product product = productService.findProductById(productId);
         productService.delete(product);
         return new ResponseEntity(HttpStatus.OK);

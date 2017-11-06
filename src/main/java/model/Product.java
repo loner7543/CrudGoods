@@ -43,8 +43,6 @@ public class Product implements Serializable{
     @Column(name = "unitname")
     private String unitName;
 
-//
-//    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY,targetEntity = Discount.class,cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Discount> discounts = new HashSet<Discount>();

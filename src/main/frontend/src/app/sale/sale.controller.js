@@ -33,9 +33,12 @@
     $scope.salesBuyers = buyers;// все покупатели со всех продаж
 
     /*свойства для диалога*/
-    $scope.orderDate="";
-    $scope.deliveryDate = "";
-    $scope.amountProduct="";
+    $scope.saleParams = {
+      orderDate:"",
+      deliveryDate : "",
+      amountProduct:"",
+      selectedBuyer:[]
+    }
     $scope.showAddDiv = false;
 
 
@@ -47,25 +50,22 @@
     };
 
     $scope.dialogOkClickHandler = function () {
-      // debugger;
-      // var data = {
-      //   name: $scope.productName,
-      //   unitCoast:"7",
-      //   unitName:"шт"
-      // };
-      // $http({
-      //   method: "POST",
-      //   url: "http://localhost:8080/crudGoods/rest/saveProduct",
-      //   params: data
-      // }).then(function (resp) {
-      //     debugger;
-      //     console.log("Success resp1", resp)
-      //     $state.reload();
-      //   },
-      //   function (result) {
-      //     debugger;
-      //     console.error(result, result.data);
-      //   });
+      debugger;
+      $scope.saleParams.orderDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.orderDate);
+      $scope.saleParams.deliveryDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.deliveryDate);
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/addSale",
+        params: $scope.saleParams
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
     }
 
     $scope.editSale = function () {
@@ -75,8 +75,24 @@
       });
     }
 
-    $scope.deleteSale = function () {
-
+    $scope.deleteSale = function (scope) {
+      var saleId = scope.sale.id;
+      debugger;
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/deleteSale",
+        params: {
+          id:saleId
+        }
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
     }
 
     $scope.showAddDiv = function () {

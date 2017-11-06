@@ -44,7 +44,7 @@ public class SaleService {
 
     @Transactional
     public void deleteSale(Sale sale){
-        entityManager.remove(sale);
+        entityManager.remove(entityManager.contains(sale) ? sale : entityManager.merge(sale));
     }
 
 

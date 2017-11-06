@@ -25,31 +25,33 @@
       }
     }
     $scope.discountsMas=discountMas;
-    $scope.firstName = "";
-    $scope.middleName = "";
-    $scope.lastName = "";
-    $scope.email = "";
-    $scope.phone = "";
-    $scope.birthDate = "";
-    $scope.livingAddress  ="";
     $scope.showAddDiv = false;
+    $scope.buyerParams={
+      firstName :"",
+      middleName :"",
+      lastName:"",
+      phoneNumber :"",
+      birthDate :"",
+      livingAddress:""
+    }
+
 
       // var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
       //  var promise = $http.get("../../data/buyers.json");
     $scope.showBuyerDialog = function() {
+      ngDialog.open({ template: 'app/buyer/addBuyer.html',
+        className: 'ngdialog-theme-default',
+        scope: $scope
+      });
+    };
 
-      var buyer = {
-        firstName: "ce",
-        middleName:"ce",
-        lastName:"ce",
-        birthDate:12223,
-        phoneNumber:"phone",
-        livingAddress:"ce",
-      };
+    $scope.buyerOkClickHandler = function () {
+      $scope.buyerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.buyerParams.birthDate);
+      console.log($scope.buyerParams);
       $http({
         method: "POST",
         url: "http://localhost:8080/crudGoods/rest/addBuyer",
-        params: buyer
+        params: $scope.buyerParams
       }).then(function (resp) {
           debugger;
           console.log("Success resp", resp)
@@ -59,22 +61,32 @@
           debugger;
           console.error(result, result.data);
         });
+    }
 
+    $scope.editBuyer = function (scope) {
       ngDialog.open({ template: 'app/buyer/addBuyer.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
     };
 
-    $scope.editBuyer = function () {
-      ngDialog.open({ template: 'app/buyer/addBuyer.html',
-        className: 'ngdialog-theme-default',
-        scope: $scope
-      });
-    };
-
-    $scope.deleteBuyer = function () {
-
+    $scope.deleteBuyer = function (scope) {
+      var buyerId = scope.buyer.id;
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/deleteBuyer",
+        params:{
+          id:buyerId
+        }
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp", resp)
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
     };
 
     $scope.showHide1 = function () {
