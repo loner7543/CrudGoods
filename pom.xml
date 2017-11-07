@@ -14,6 +14,7 @@
         <hibernate.version>4.3.0.Final</hibernate.version>
         <fasterxml.version>2.9.1</fasterxml.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
+        <slf4jVersion>1.7.21</slf4jVersion>
     </properties>
 
     <profiles>
@@ -236,11 +237,16 @@
             <version>${hibernate.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.0-rc1</version>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4jVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->

@@ -26,6 +26,7 @@
     }
     $scope.discountsMas=discountMas;
     $scope.showAddDiv = false;
+
     $scope.buyerParams={
       firstName :"",
       middleName :"",
@@ -73,7 +74,7 @@
     $scope.deleteBuyer = function (scope) {
       var buyerId = scope.buyer.id;
       $http({
-        method: "POST",
+        method: "DELETE",
         url: "http://localhost:8080/crudGoods/rest/deleteBuyer",
         params:{
           id:buyerId

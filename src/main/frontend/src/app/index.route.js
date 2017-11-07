@@ -93,7 +93,6 @@
              controllerAs: 'sellerCtrl'
            }
          },
-         resolve: {
            resolve: {
              allSellers: function ($http) {
                return $http({
@@ -103,7 +102,6 @@
                });
              }
            }
-         }
        });
 
     $urlRouterProvider.otherwise(function ($injector, $location) {

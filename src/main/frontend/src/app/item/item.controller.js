@@ -42,6 +42,7 @@
     $scope.editOkHandler = function () {
       debugger;
       console.log( $scope.params);
+
       $scope.params.id=1;
       var data = $scope.params
       $http({

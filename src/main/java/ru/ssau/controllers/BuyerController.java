@@ -45,7 +45,7 @@ public class BuyerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteBuyer")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteBuyer")
     public ResponseEntity deleteBuyer(@RequestParam(value = Buyer.ID_VALUE) Integer buyerId){
         Buyer deleted = buyerService.getBuyerById(buyerId);
         buyerService.removeBuyer(deleted);

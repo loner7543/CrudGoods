@@ -66,7 +66,7 @@
       debugger;
       var deletedId = scope.discount.id;
       $http({
-        method: "POST", // todo change method type
+        method: "DELETE",
         url: "http://localhost:8080/crudGoods/rest/deleteDiscount",
         params: {
           id:deletedId

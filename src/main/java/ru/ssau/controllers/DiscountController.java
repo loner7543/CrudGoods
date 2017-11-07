@@ -51,7 +51,7 @@ public class DiscountController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteDiscount")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteDiscount")
     public ResponseEntity deleteDiscount(@RequestParam(value = Discount.ID_VALUE) Integer discountId){
         Discount deleted = discountService.findDiscountById(discountId);
         try{

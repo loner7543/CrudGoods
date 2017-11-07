@@ -19,7 +19,7 @@ public class SellerController {
     @Autowired
     private SellerService sellerService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getAllSellers")
+    @RequestMapping(method = RequestMethod.POST, value = "/getAllSellers")//+
     public @ResponseBody List<Seller> getAllSellers(){
         return sellerService.getAllSellers();
     }
@@ -30,7 +30,7 @@ public class SellerController {
                           @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
                           @RequestParam(value = Seller.BIRTH_DATE_VALUE) Long birthDate,
                           @RequestParam(value = Seller.EMAIL_VALUE) String email,
-                          @RequestParam(value = Seller.EMAIL_VALUE) String deliveryAddress){
+                          @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress){
         Seller seller = new Seller(firstName,middleName,lastName,new Date(birthDate),email,deliveryAddress,null);
         sellerService.addSeller(seller);
         return new ResponseEntity(HttpStatus.OK);
@@ -43,7 +43,7 @@ public class SellerController {
                              @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
                              @RequestParam(value = Seller.BIRTH_DATE_VALUE) Long birthDate,
                              @RequestParam(value = Seller.EMAIL_VALUE) String email,
-                             @RequestParam(value = Seller.EMAIL_VALUE) String deliveryAddress){
+                             @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress){
         Seller updatedSeller = sellerService.getSellerById(id);
         updatedSeller.setFirstName(firstName);
         updatedSeller.setLastName(lastName);
@@ -55,7 +55,7 @@ public class SellerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/deleteSeller")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSeller")
     public ResponseEntity deleteSeller(@RequestParam(value = Seller.ID_VALUE) Integer sellerId){
         Seller deleted = sellerService.getSellerById(sellerId);
         sellerService.deleteSeller(deleted);

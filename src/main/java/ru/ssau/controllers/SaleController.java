@@ -2,6 +2,8 @@ package ru.ssau.controllers;
 
 import model.Buyer;
 import model.Sale;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @Controller
 @RestController
 public class SaleController {
+    private static final Logger logger = LoggerFactory.getLogger(SaleController.class);
 
     @Autowired
     private SaleService saleService;
@@ -34,12 +37,14 @@ public class SaleController {
                                              @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate,
                                              @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                              @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId) {
+        logger.info("started");
         Buyer selectedBuyer = buyerService.getBuyerById(buyerId);
         Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,null,selectedBuyer);
         try {
             saleService.addSale(sale);
         }
         catch (Throwable e){
+            logger.error("add sale failed",e);
          return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -55,7 +60,7 @@ public class SaleController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteSale")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSale")
     public ResponseEntity deleteSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId){
         try{
             Sale deletedSale = saleService.getSaleById(saleId);

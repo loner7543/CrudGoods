@@ -14,6 +14,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="seller in sellers">
+      <td style="display: none">{{seller.id}}</td>
       <td>{{seller.firstName}}</td>
       <td>{{seller.middleName}}</td>
       <td>{{seller.lastName}}</td>
@@ -25,13 +26,12 @@
         <button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
       </td>
       <td>
-        <button class="btn btn-primary" ng-click="editSeller()">Изменить</button>
+        <button class="btn btn-primary" ng-click="editSeller(this)">Изменить</button>
       </td>
       <td>
-        <button class="btn btn-danger" ng-click="deleteSeller()">Удалить</button>
+        <button class="btn btn-danger" ng-click="deleteSeller(this)">Удалить</button>
       </td>
     </tr>
     </tbody>
   </table>
-  <button ng-click="getAllSellers()">Загрузить продавцов</button>
 </div>

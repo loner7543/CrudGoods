@@ -79,7 +79,7 @@
       var saleId = scope.sale.id;
       debugger;
       $http({
-        method: "POST",
+        method: "DELETE",
         url: "http://localhost:8080/crudGoods/rest/deleteSale",
         params: {
           id:saleId
