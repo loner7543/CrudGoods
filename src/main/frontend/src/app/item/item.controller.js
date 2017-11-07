@@ -47,7 +47,10 @@
       $http({
         method: "PUT",
         url: "http://localhost:8080/crudGoods/rest/updateProduct",
-        data:  $scope.params
+        data:  $scope.params,
+        headers: {
+          "Content-Type": "application/json"
+        }
       }).then(function (resp) {
           debugger;
           console.log("Success resp1", resp)
@@ -97,10 +100,11 @@
     };
 
     $scope.deleteProductHandler = function (scope) {
+      debugger;
       var deletedId= scope.item.id;
       console.log(deletedId);
       $http({
-        method: "POST", // todo change method type
+        method: "DELETE", // todo change method type
         url: "http://localhost:8080/crudGoods/rest/removeProduct",
         params: {
           id:deletedId

@@ -44,7 +44,7 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/removeProduct")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/removeProduct")
     public ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
         Product product = productService.findProductById(productId);
         productService.delete(product);
