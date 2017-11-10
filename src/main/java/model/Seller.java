@@ -36,6 +36,9 @@ public class Seller implements Serializable {
     @Transient
     public static final String DELIVERY_ADDRESS_VALUE = "deliveryAddress";
 
+    @Transient
+    public static final String SALE_ID="saleSelect";
+
 
     @Id
     @GeneratedValue(generator = "SEQ_ID")

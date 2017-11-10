@@ -1,23 +1,27 @@
 package ru.ssau.controllers;
 
+import model.Sale;
 import model.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import service.SaleService;
 import service.SellerService;
 
 import java.util.Date;
 import java.util.List;
 
-// todo replace all null's
 @RestController
 @Controller
 public class SellerController {
 
     @Autowired
     private SellerService sellerService;
+
+    @Autowired
+    private SaleService saleService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/getAllSellers")//+
     public @ResponseBody List<Seller> getAllSellers(){
@@ -30,8 +34,10 @@ public class SellerController {
                           @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
                           @RequestParam(value = Seller.BIRTH_DATE_VALUE) Long birthDate,
                           @RequestParam(value = Seller.EMAIL_VALUE) String email,
-                          @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress){
-        Seller seller = new Seller(firstName,middleName,lastName,new Date(birthDate),email,deliveryAddress,null);
+                          @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress,
+                                    @RequestParam(value = Seller.SALE_ID) Integer saleId){
+        Sale sale = saleService.getSaleById(saleId);
+        Seller seller = new Seller(firstName,middleName,lastName,new Date(birthDate),email,deliveryAddress,sale);
         sellerService.addSeller(seller);
         return new ResponseEntity(HttpStatus.OK);
     }

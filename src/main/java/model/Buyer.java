@@ -68,8 +68,7 @@ public class Buyer implements Serializable {
     public Buyer() {
     }
 
-    public Buyer(int id, String firstName, String middleName, String lastName, Date birthDate, String phoneNumber, String livingAddress) {
-        this.id = id;
+    public Buyer( String firstName, String middleName, String lastName, Date birthDate, String phoneNumber, String livingAddress) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

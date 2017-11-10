@@ -39,7 +39,7 @@ public class SaleController {
                                              @RequestParam(value = Sale.SELECTED_BUYER_ID) Integer buyerId) {
         logger.info("started");
         Buyer selectedBuyer = buyerService.getBuyerById(buyerId);
-        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,null,selectedBuyer);
+        Sale sale = new Sale(new Date(orderDate),new Date(deliveryDate),amountProduct,selectedBuyer);
         try {
             saleService.addSale(sale);
         }

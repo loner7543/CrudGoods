@@ -30,8 +30,8 @@ public class DiscountService {
     }
 
     @Transactional
-    public void addDiscount(Discount discount){
-        entityManager.persist(discount);
+    public void addDiscount(Discount discount) throws Exception{
+        entityManager.merge(discount);
     }
 
     @Transactional

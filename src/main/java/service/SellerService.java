@@ -35,7 +35,7 @@ public class SellerService {
 
     @Transactional
     public void addSeller(Seller seller){
-       entityManager.persist(seller);
+       entityManager.merge(seller);
     }
 
     @Transactional

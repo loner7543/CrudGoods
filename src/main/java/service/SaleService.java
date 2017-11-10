@@ -29,7 +29,7 @@ public class SaleService {
 
     @Transactional
     public void addSale(Sale sale){
-        entityManager.persist(sale);
+        entityManager.merge(sale);
     }
 
     @Transactional

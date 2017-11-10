@@ -29,6 +29,9 @@ public class Product implements Serializable{
     @Transient
     public static final String UNIT_NAME_VALUE = "unitName";
 
+    @Transient
+    public static final String SALE_ID = "selectedSale";
+
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")
@@ -83,6 +86,13 @@ public class Product implements Serializable{
         this.name = name;
         this.unitCoast = unitCoast;
         this.unitName = unitName;
+    }
+
+    public Product(String name, int unitCoast, String unitName, Sale sale) {
+        this.name = name;
+        this.unitCoast = unitCoast;
+        this.unitName = unitName;
+        this.sale = sale;
     }
 
     public Product(int id, String name, int unitCoast, String unitName) {

@@ -1,5 +1,6 @@
 package ru.ssau.controllers;
 
+import model.Buyer;
 import model.Discount;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.BuyerService;
 import service.DiscountService;
+import service.ProductService;
 
 import java.util.Date;
 import java.util.List;
 
-//todo replace all null's values
 @Controller
 public class DiscountController {
 
     @Autowired
     private DiscountService discountService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private BuyerService buyerService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/getDiscounts")
     public @ResponseBody List<Discount> getAddDiscounts(){
@@ -29,11 +37,20 @@ public class DiscountController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addDiscount")
-    public ResponseEntity addNewDiscount(@RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
-                               @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
-                               @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount){
-        Discount discount = new Discount(new Date(actualFrom),new Date(actualTo),amountDiscount,null,null);
-        discountService.addDiscount(discount);
+    public ResponseEntity addNewDiscount(
+                                            @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long actualFrom,
+                                            @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long actualTo,
+                                            @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer amountDiscount,
+                                            @RequestParam(value = Discount.PRODUCT_ID) Integer productId,
+                                            @RequestParam(value = Discount.BUYER_ID) Integer buyerId){
+        Product product = productService.findProductById(productId);
+        Buyer buyer = buyerService.getBuyerById(buyerId);
+        Discount discount = new Discount(new Date(actualFrom),new Date(actualTo),amountDiscount,product,buyer);
+        try {
+            discountService.addDiscount(discount);
+        } catch (Exception e) {
+            new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);//todo detached entity passed to persist - persist ot merge
+        }
         return new ResponseEntity(HttpStatus.OK);
     }
 

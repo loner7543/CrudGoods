@@ -15,10 +15,43 @@
     }
     $scope.discounts = allDiscounts.data;
 
+    //для добавления
+    var buyerPromise =$http.post("http://localhost:8080/crudGoods/rest/getAllBuyers");
+    -      buyerPromise.then(fulfilled, rejected);
+
+    function fulfilled(resp) {
+      console.log(resp.data);
+      for (var i =0;i<resp.data.length;i++){
+        resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
+      }
+      $scope.buyers = resp.data;
+    }
+
+    function rejected(error) {
+      debugger;
+      console.log(error);
+    }
+
+    var productPromise =$http.post("http://localhost:8080/crudGoods/rest/getProducts");
+    -      productPromise.then(productFulfilled, productRejected);
+
+    function productFulfilled(resp) {
+      console.log(resp.data);
+      $scope.products = resp.data;
+    }
+
+    function productRejected(error) {
+      debugger;
+      console.log(error);
+    }
+
+
     $scope.discountParams={
       actualFrom:"",
       actualTo:"",
-      amountDiscount:""// даты - строки!
+      amountDiscount:"",
+      selectedBuyer:0,
+      selectedProduct:0
     };
 
     $scope.addDiscount = function() {
@@ -30,16 +63,13 @@
 
     $scope.discountOkClickHandler = function () {
       debugger;
-      var newDiscount = {
-        actualFrom:UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom),
-        actualTo:UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo),
-        amountDiscount:$scope.discountParams.amountDiscount
-      }
-      console.log(newDiscount);
+      $scope.discountParams.actualFrom=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom);
+      $scope.discountParams.actualTo=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo);
+      console.log($scope.discountParams);
       $http({
         method: "POST",
         url: "http://localhost:8080/crudGoods/rest/addDiscount",
-        params:  newDiscount
+        params:  $scope.discountParams
       }).then(function (resp) {
           debugger;
           console.log("Success resp", resp)

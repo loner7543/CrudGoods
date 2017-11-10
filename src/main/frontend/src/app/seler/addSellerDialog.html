@@ -13,10 +13,10 @@
   <input type="text" placeholder="Введите адрес доставки" ng-model="sellerParams.deliveryAddress"><br>
   <h3>Выберите продажу</h3>
 
-  <!--<select name="buyerSelect" ng-model="selectedBuyer">-->
-    <!--<option ng-repeat="option in salesBuyers"-->
-            <!--ng-value="option.id" class="panel panel-primary">{{option.firstName}}  {{option.lastName}}</option>-->
-  <!--</select><br>-->
+  <select name="saleSelect" ng-model="sellerParams.saleSelect">
+    <option ng-repeat="option in sells"
+            ng-value="option.id" class="panel panel-primary">{{option.orderDate}}</option>
+  </select><br>
 
   <button class="btn btn-primary" ng-click="addSellerOkHandler()">Добавить</button>
   <button class="btn btn-danger" ng-click="addSellerCancelClickHandler()">Отмена</button>

@@ -24,10 +24,29 @@
     $scope.discountsMas= discountMas
     $scope.showAddDiv=false
 
+
+    var allSales =$http.post("http://localhost:8080/crudGoods/rest/getAllSells");
+    -      allSales.then(fulfilled, rejected);
+
+    function fulfilled(resp) {
+      console.log(resp.data);
+      for (var i =0;i<resp.data.length;i++){
+        resp.data[i].orderDate = UtilsFunctionsFactory.toDate(resp.data[i].orderDate);
+        resp.data[i].deliveryDate = UtilsFunctionsFactory.toDate(resp.data[i].deliveryDate);
+      }
+      $scope.sells = resp.data;
+    }
+
+    function rejected(error) {
+      debugger;
+      console.log(error);
+    }
+
     $scope.params = {
       name: "",
       unitCoast: "",
-      unitName: ""
+      unitName: "",
+      selectedSale:0
     };
 
     $scope.modalShown = false;

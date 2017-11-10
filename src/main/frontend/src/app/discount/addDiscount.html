@@ -6,9 +6,20 @@
   <h3>Размер скидки</h3>
 <input type="text" placeholder="Введите размер скидки" ng-model="discountParams.amountDiscount">
   <h3>Выберите покупателя</h3>
-  <select id="buyrsList"></select>
+  <div class="hideScroll">
+      <select name="saleSelect" ng-model="discountParams.selectedBuyer">
+        <option ng-repeat="option in buyers"
+                ng-value="option.id" class="panel panel-primary"> {{option.firstName}}</option>
+      </select>
+    </div><br>
+
   <h3>Выберите товар</h3>
-  <select id="productList"></select><br>
+    <div class="hideScroll">
+        <select name="saleSelect" ng-model="discountParams.selectedProduct">
+          <option ng-repeat="option in products"
+                  ng-value="option.id" class="panel panel-primary"> {{option.name}}</option>
+        </select>
+      </div><br>
   <button class="btn btn-primary" ng-click="discountOkClickHandler()">Добавить</button>
   <button class="btn btn-danger">Отмена</button>
 </div>

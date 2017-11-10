@@ -40,7 +40,7 @@ public class BuyerController {
                          @RequestParam(value = Buyer.BIRTH_DATE_VALUE) Long birthDate,
                          @RequestParam(value = Buyer.LIVING_ADDRESS_VALUE) String livingAddress,
                          @RequestParam(value = Buyer.PHONE_NUMBER_VALUE) String phoneNumber){
-        Buyer buyer = new Buyer(firstName,middleName,lastName,new Date(birthDate),livingAddress,phoneNumber,null);
+        Buyer buyer = new Buyer(firstName,middleName,lastName,new Date(birthDate),phoneNumber,livingAddress);
         buyerService.addBuyer(buyer);
         return new ResponseEntity(HttpStatus.OK);
     }

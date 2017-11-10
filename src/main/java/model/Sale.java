@@ -78,6 +78,13 @@ public class Sale implements Serializable {
         this.products = products;
     }
 
+    public Sale(Date orderDate, Date deliveryDate, int amountProduct, Buyer buyer) {
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.amountProduct = amountProduct;
+        this.buyer = buyer;
+    }
+
     public Sale(Date orderDate, Date deliveryDate, int amountProduct, Set<Product> products, Buyer buyer) {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
