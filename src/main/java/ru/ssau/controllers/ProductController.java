@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     // todo  Product передать через body запросом На клиенте его в body
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct")
+    @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct",consumes = "application/json")
     public ResponseEntity updateProduct(@RequestBody Product newProduct){
         Product product = productService.findProductById(newProduct.getId());
 //        product.setName(productName);

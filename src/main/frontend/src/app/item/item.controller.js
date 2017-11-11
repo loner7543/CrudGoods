@@ -58,19 +58,16 @@
       });
     }
 
-    $scope.editOkHandler = function () {
+    $scope.editOkHandler = function (scope) {
       debugger;
-      console.log( $scope.params);
-
-      $scope.params.id=1;
-      var data = $scope.params
+      $scope.params.id = scope.$parent.entityId;
       $http({
         method: "PUT",
         url: "http://localhost:8080/crudGoods/rest/updateProduct",
-        data:  $scope.params,
-        headers: {
-          "Content-Type": "application/json"
-        }
+        data:  $scope.params
+        // headers: {
+        //   "content-type": "application/json"
+        // }
       }).then(function (resp) {
           debugger;
           console.log("Success resp1", resp)
@@ -109,6 +106,8 @@
 
     $scope.editProductHandler = function (scope) {
       console.log(scope);
+      debugger;
+      $scope.entityId=scope.item.id;
       $scope.params.name=scope.item.name;
       $scope.params.unitCoast = scope.item.unitCoast;
       $scope.params.unitName=scope.item.unitName;
