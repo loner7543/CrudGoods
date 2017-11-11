@@ -30,7 +30,7 @@ public class DiscountController {
     @Autowired
     private BuyerService buyerService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getDiscounts")
+    @RequestMapping(method = RequestMethod.GET, value = "/getDiscounts")
     public @ResponseBody List<Discount> getAddDiscounts(){
         List<Discount> discounts = discountService.getAllDisc();
         return discounts;

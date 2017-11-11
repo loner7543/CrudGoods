@@ -25,7 +25,7 @@
     $scope.showAddDiv=false
 
 
-    var allSales =$http.post("http://localhost:8080/crudGoods/rest/getAllSells");
+    var allSales =$http.get("http://localhost:8080/crudGoods/rest/getAllSells");
     -      allSales.then(fulfilled, rejected);
 
     function fulfilled(resp) {
@@ -103,8 +103,8 @@
         });
     }
 
-    $scope.dialogCancelHandler = function () {
-
+    $scope.dialogCancelHandler = function (scope) {/*scope диалога*/
+      scope.closeThisDialog()
     }
 
     $scope.editProductHandler = function (scope) {
@@ -124,7 +124,7 @@
       var deletedId= scope.item.id;
       console.log(deletedId);
       $http({
-        method: "DELETE", // todo change method type
+        method: "DELETE",
         url: "http://localhost:8080/crudGoods/rest/removeProduct",
         params: {
           id:deletedId

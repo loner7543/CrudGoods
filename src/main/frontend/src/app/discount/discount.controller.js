@@ -16,7 +16,7 @@
     $scope.discounts = allDiscounts.data;
 
     //для добавления
-    var buyerPromise =$http.post("http://localhost:8080/crudGoods/rest/getAllBuyers");
+    var buyerPromise =$http.get("http://localhost:8080/crudGoods/rest/getAllBuyers");
     -      buyerPromise.then(fulfilled, rejected);
 
     function fulfilled(resp) {
@@ -32,7 +32,7 @@
       console.log(error);
     }
 
-    var productPromise =$http.post("http://localhost:8080/crudGoods/rest/getProducts");
+    var productPromise =$http.get("http://localhost:8080/crudGoods/rest/getProducts");
     -      productPromise.then(productFulfilled, productRejected);
 
     function productFulfilled(resp) {
@@ -79,6 +79,10 @@
           debugger;
           console.error(result, result.data);
         });
+    }
+
+    $scope.discountCancelHandler = function (scope) {
+      scope.closeThisDialog();
     }
 
     $scope.discountCancelClicHandler = function () {

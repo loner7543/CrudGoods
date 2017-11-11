@@ -27,7 +27,7 @@ public class SaleController {
     @Autowired
     private BuyerService buyerService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getAllSells")
+    @RequestMapping(method = RequestMethod.GET, value = "/getAllSells")
     public  @ResponseBody List<Sale> getAllSells(){
         return saleService.getAllSells();
     }

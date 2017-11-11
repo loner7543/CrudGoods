@@ -23,7 +23,7 @@ public class SellerController {
     @Autowired
     private SaleService saleService;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/getAllSellers")//+
+    @RequestMapping(method = RequestMethod.GET, value = "/getAllSellers")//+
     public @ResponseBody List<Seller> getAllSellers(){
         return sellerService.getAllSellers();
     }

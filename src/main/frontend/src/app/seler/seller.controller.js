@@ -28,7 +28,7 @@
       saleSelect:0
     }
 
-    var allSale =$http.post("http://localhost:8080/crudGoods/rest/getAllSells");
+    var allSale =$http.get("http://localhost:8080/crudGoods/rest/getAllSells");
     -      allSale.then(fulfilled, rejected);
 
     function fulfilled(resp) {
@@ -72,8 +72,8 @@
         });
     }
 
-    $scope.addSellerCancelClickHandler = function () {
-
+    $scope.addSellerCancelClickHandler = function (scope) {
+      scope.closeThisDialog();
     }
 
     $scope.editSeller = function (scope) {

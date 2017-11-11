@@ -25,12 +25,21 @@
     }
     $scope.salesProducts = products;
 
-    var buyers = [];
-    for (var i= 0;i<$scope.sales.length;i++){
-      var buyer = $scope.sales[i].buyer;
-      buyers.unshift(buyer);
+    var promise =$http.get("http://localhost:8080/crudGoods/rest/getAllBuyers");
+    -      promise.then(fulfilled, rejected);
+
+    function fulfilled(resp) {
+      console.log(resp.data);
+      for (var i =0;i<resp.data.length;i++){
+        resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
+      }
+      $scope.salesBuyers =  resp.data;
     }
-    $scope.salesBuyers = buyers;// все покупатели со всех продаж
+
+    function rejected(error) {
+      debugger;
+      console.log(error);
+    }
 
     /*свойства для диалога*/
     $scope.saleParams = {
@@ -66,6 +75,10 @@
           debugger;
           console.error(result, result.data);
         });
+    }
+
+    $scope.dialogCancelHandler = function (scope) {
+      scope.closeThisDialog()
     }
 
     $scope.editSale = function () {

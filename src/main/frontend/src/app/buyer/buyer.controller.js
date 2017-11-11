@@ -64,6 +64,10 @@
         });
     }
 
+    $scope.closeBuyerAddDialog = function (scope) {
+      scope.closeThisDialog();
+    }
+
     $scope.editBuyer = function (scope) {
       ngDialog.open({ template: 'app/buyer/addBuyer.html',
         className: 'ngdialog-theme-default',

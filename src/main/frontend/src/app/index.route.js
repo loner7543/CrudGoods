@@ -20,7 +20,7 @@
          resolve: {
            allProducts: function ($http) {
              return $http({
-               method: "POST",
+               method: "GET",
                url: "http://localhost:8080/crudGoods/rest/getProducts",
                params:{}
              });
@@ -39,7 +39,7 @@
        resolve: {
          allBuyers: function ($http) {
            return $http({
-             method: "POST",
+             method: "GET",
              url: "http://localhost:8080/crudGoods/rest/getAllBuyers",
              params:{}
            });
@@ -58,7 +58,7 @@
        resolve: {
          allDiscounts: function ($http) {
            return $http({
-             method: "POST",
+             method: "GET",
              url: "http://localhost:8080/crudGoods/rest/getDiscounts",
              params:{}
            });
@@ -77,7 +77,7 @@
          resolve: {
            allSells: function ($http) {
              return $http({
-               method: "POST",
+               method: "GET",
                url: "http://localhost:8080/crudGoods/rest/getAllSells",
                params:{}
              });
@@ -96,7 +96,7 @@
            resolve: {
              allSellers: function ($http) {
                return $http({
-                 method: "POST",
+                 method: "GET",
                  url: "http://localhost:8080/crudGoods/rest/getAllSellers",
                  params:{}
                });
