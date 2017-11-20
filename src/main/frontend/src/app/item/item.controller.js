@@ -62,15 +62,13 @@
       debugger;
       $scope.params.id = scope.$parent.entityId;
       $http({
-        method: "PUT",
+        method: "POST",
         url: "http://localhost:8080/crudGoods/rest/updateProduct",
-        data:  $scope.params
-        // headers: {
-        //   "content-type": "application/json"
-        // }
+        params:  $scope.params
       }).then(function (resp) {
           debugger;
-          console.log("Success resp1", resp)
+          console.log("Success resp1", resp);
+          scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
@@ -106,7 +104,6 @@
 
     $scope.editProductHandler = function (scope) {
       console.log(scope);
-      debugger;
       $scope.entityId=scope.item.id;
       $scope.params.name=scope.item.name;
       $scope.params.unitCoast = scope.item.unitCoast;

@@ -68,12 +68,39 @@
       scope.closeThisDialog();
     }
 
-    $scope.editBuyer = function (scope) {
-      ngDialog.open({ template: 'app/buyer/addBuyer.html',
+    $scope.editBuyer = function (tableScope) {
+      $scope.entityId=tableScope.buyer.id;
+      $scope.buyerParams.firstName=tableScope.buyer.firstName;
+      $scope.buyerParams.middleName=tableScope.buyer.middleName;
+      $scope.buyerParams.lastName=tableScope.buyer.lastName;
+      $scope.buyerParams.birthDate=tableScope.buyer.birthDate;
+      $scope.buyerParams.livingAddress=tableScope.buyer.livingAddress;
+      $scope.buyerParams.phoneNumber=tableScope.buyer.phoneNumber;
+      ngDialog.open({ template: 'app/buyer/editBuyer.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
     };
+
+    $scope.editOkBuyerHandler = function (scope) {
+      debugger;
+      $scope.buyerParams.id = scope.$parent.entityId;
+      $scope.buyerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.buyerParams.birthDate);
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/updateBuyer",
+        params: $scope.buyerParams
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp", resp);
+          scope.closeThisDialog();
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
+    }
 
     $scope.deleteBuyer = function (scope) {
       var buyerId = scope.buyer.id;

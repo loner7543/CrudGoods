@@ -27,10 +27,30 @@ public class BuyerController {
         return buyers;
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateBuyer")
-    public ResponseEntity updateBuyer(){
-        buyerService.updateBuyer(null);
-        return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.POST, value = "/updateBuyer")
+    public ResponseEntity updateBuyer(
+                                      @RequestParam(value = Buyer.ID_VALUE) Integer buyerId,
+                                      @RequestParam(value = Buyer.FIRST_NAME_VALUE) String firstName,
+                                      @RequestParam(value = Buyer.MIDDLE_NAME_VALUE) String middleName,
+                                      @RequestParam(value = Buyer.LAST_NAME_VALUE) String lastName,
+                                      @RequestParam(value = Buyer.BIRTH_DATE_VALUE) Long birthDate,
+                                      @RequestParam(value = Buyer.LIVING_ADDRESS_VALUE) String livingAddress,
+                                      @RequestParam(value = Buyer.PHONE_NUMBER_VALUE) String phoneNumber){
+        try{
+            Buyer updatedBuyer = buyerService.getBuyerById(buyerId);
+            updatedBuyer.setFirstName(firstName);
+            updatedBuyer.setMiddleName(middleName);
+            updatedBuyer.setLastName(lastName);
+            updatedBuyer.setBirthDate(new Date(birthDate));
+            updatedBuyer.setLivingAddress(livingAddress);
+            updatedBuyer.setPhoneNumber(phoneNumber);
+            buyerService.updateBuyer(updatedBuyer);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/addBuyer")

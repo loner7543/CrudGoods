@@ -49,23 +49,29 @@ public class DiscountController {
         try {
             discountService.addDiscount(discount);
         } catch (Exception e) {
-            new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);//todo detached entity passed to persist - persist ot merge
+            new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);//todo detached entity passed to persist - persist ot merge-fixed
         }
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/updateDiscount")
+    @RequestMapping(method = RequestMethod.POST, value = "/updateDiscount")
     public ResponseEntity updateDiscount(
                                 @RequestParam(value = Discount.ID_VALUE) Integer discountId,
                                 @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long newActualFromDate,
                                 @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long newActualToDate,
                                 @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer newAmountDiscount){
-        Discount updated = discountService.findDiscountById(discountId);
-        updated.setActualFrom(new Date(newActualFromDate));
-        updated.setActualTo(new Date(newActualToDate));
-        updated.setAmountDiscount(newAmountDiscount);
-        discountService.updateDiscount(updated);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Discount updated = discountService.findDiscountById(discountId);
+            updated.setActualFrom(new Date(newActualFromDate));
+            updated.setActualTo(new Date(newActualToDate));
+            updated.setAmountDiscount(newAmountDiscount);
+            discountService.updateDiscount(updated);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteDiscount")

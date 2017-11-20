@@ -42,14 +42,23 @@ public class ProductController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    // todo  Product передать через body запросом На клиенте его в body
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct",consumes = "application/json")
-    public ResponseEntity updateProduct(@RequestBody Product newProduct){
-        Product product = productService.findProductById(newProduct.getId());
-//        product.setName(productName);
-//        product.setUnitCoast(unitCoast);
-//        product.setUnitName(unitName);
-        productService.update(product);
+    @RequestMapping(method = RequestMethod.POST, value = "/updateProduct")
+    public ResponseEntity updateProduct(
+                                         @RequestParam(value = Product.ID_VALUE) Integer productId,
+                                         @RequestParam(value = Product.NAME_VALUE) String productName,
+                                         @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
+                                         @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName){
+                try{
+                    Product updatedProduct =productService.findProductById(productId);
+                    updatedProduct.setName(productName);
+                    updatedProduct.setUnitCoast(unitCoast);
+                    updatedProduct.setUnitName(unitName);
+                    productService.update(updatedProduct);
+                }
+                catch (Exception e){
+                    return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
         return new ResponseEntity(HttpStatus.OK);
     }
 

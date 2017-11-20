@@ -42,7 +42,7 @@ public class SellerController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateSeller")
+    @RequestMapping(method = RequestMethod.POST, value = "/updateSeller")
     public ResponseEntity updateSeller(@RequestParam(value = Seller.ID_VALUE) Integer id,
                              @RequestParam(value = Seller.FIRST_NAME_VALUE) String firstName,
                              @RequestParam(value = Seller.MIDDLE_NAME_VALUE) String middleName,

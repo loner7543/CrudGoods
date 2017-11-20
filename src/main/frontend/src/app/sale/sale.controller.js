@@ -58,7 +58,7 @@
       });
     };
 
-    $scope.dialogOkClickHandler = function () {
+    $scope.dialogOkClickHandler = function (scope) {
       debugger;
       $scope.saleParams.orderDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.orderDate);
       $scope.saleParams.deliveryDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.deliveryDate);
@@ -68,7 +68,8 @@
         params: $scope.saleParams
       }).then(function (resp) {
           debugger;
-          console.log("Success resp1", resp)
+          console.log("Success resp1", resp);
+          scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
@@ -81,11 +82,36 @@
       scope.closeThisDialog()
     }
 
-    $scope.editSale = function () {
-      ngDialog.open({ template: 'app/sale/addSaleDialog.html',
+    $scope.editSale = function (saleScope) {
+      $scope.entityId=saleScope.sale.id;
+      $scope.saleParams.orderDate=saleScope.sale.orderDate;
+      $scope.saleParams.deliveryDate=saleScope.sale.deliveryDate;
+      $scope.saleParams.amountProduct=saleScope.sale.amountProduct;
+      ngDialog.open({ template: 'app/sale/editSaleDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
+    }
+
+    $scope.editSaleOkClickHandler = function (scope) {
+      debugger;
+      $scope.saleParams.id = scope.$parent.entityId;
+      $scope.saleParams.orderDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.orderDate);
+      $scope.saleParams.deliveryDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.deliveryDate);
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/updateSale",
+        params: $scope.saleParams
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp);
+          scope.closeThisDialog();
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
     }
 
     $scope.deleteSale = function (scope) {

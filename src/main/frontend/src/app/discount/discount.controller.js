@@ -85,15 +85,36 @@
       scope.closeThisDialog();
     }
 
-    $scope.discountCancelClicHandler = function () {
-
-    }
-
-    $scope.editDiscount = function () {
-      ngDialog.open({ template: 'app/discount/addDiscount.html',
+    $scope.editDiscount = function (scope) {// todo покупатель и продавец пока не передаются
+      $scope.entityId=scope.discount.id;
+      $scope.discountParams.actualFrom = scope.discount.actualFrom;
+      $scope.discountParams.actualTo = scope.discount.actualTo;
+      $scope.discountParams.amountDiscount = scope.discount.amountDiscount;
+      ngDialog.open({ template: 'app/discount/editDiscount.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
+    }
+
+    $scope.editOkDiscountHandler = function (scope) {
+      debugger;
+      $scope.discountParams.id = scope.$parent.entityId;
+      $scope.discountParams.actualFrom=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom);
+      $scope.discountParams.actualTo=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo);
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/updateDiscount",
+        params:  $scope.discountParams
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp1", resp);
+          scope.closeThisDialog();
+          $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
     }
 
     $scope.deleteDiscount = function (scope) {

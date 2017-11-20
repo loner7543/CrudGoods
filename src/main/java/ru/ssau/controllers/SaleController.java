@@ -15,7 +15,6 @@ import service.SaleService;
 import java.util.Date;
 import java.util.List;
 
-//todo replace all null's
 @Controller
 @RestController
 public class SaleController {
@@ -51,12 +50,16 @@ public class SaleController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/updateSale")
+    @RequestMapping(method = RequestMethod.POST, value = "/updateSale")
     public ResponseEntity updateSale(@RequestParam(value = Sale.ID_VALUE) Integer saleId,
-                           @RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
-                           @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate){
+                                     @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
+                                     @RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
+                                     @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate){
         Sale existingSale = saleService.getSaleById(saleId);
-        saleService.updateSale(existingSale);// todo дописать
+        existingSale.setDeliveryDate(new Date(deliveryDate));
+        existingSale.setOrderDate(new Date(orderDate));
+        existingSale.setAmountProduct(amountProduct);
+        saleService.updateSale(existingSale);
         return new ResponseEntity(HttpStatus.OK);
     }
 
