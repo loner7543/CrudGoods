@@ -49,14 +49,17 @@ public class SellerController {
                              @RequestParam(value = Seller.LAST_NAME_VALUE) String lastName,
                              @RequestParam(value = Seller.BIRTH_DATE_VALUE) Long birthDate,
                              @RequestParam(value = Seller.EMAIL_VALUE) String email,
-                             @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress){
+                             @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress,
+                                       @RequestParam(value = Seller.SALE_ID) Integer saleId){
         Seller updatedSeller = sellerService.getSellerById(id);
+        Sale selectedSale = saleService.getSaleById(saleId);
         updatedSeller.setFirstName(firstName);
         updatedSeller.setLastName(lastName);
         updatedSeller.setMiddleName(middleName);
         updatedSeller.setBirthDate(new Date(birthDate));
         updatedSeller.setEmail(email);
         updatedSeller.setDeliveryAddress(deliveryAddress);
+        updatedSeller.setSale(selectedSale);
         sellerService.updateSeller(updatedSeller);
         return new ResponseEntity(HttpStatus.OK);
     }

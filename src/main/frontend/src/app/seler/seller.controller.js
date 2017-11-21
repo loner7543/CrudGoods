@@ -4,7 +4,7 @@
     .controller('SellersController', SellersController);
 
   /** @ngInject */
-  function SellersController($scope, $http, ngDialog, UtilsFunctionsFactory, allSellers) {
+  function SellersController($scope, $http, ngDialog, UtilsFunctionsFactory, allSellers,$state) {
     var vm = this;
 
     for (var i = 0; i < allSellers.data.length; i++) {
@@ -53,7 +53,7 @@
       });
     };
 
-    $scope.addSellerOkHandler = function () {
+    $scope.addSellerOkHandler = function (dialogScope) {
       debugger;
       $scope.sellerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.sellerParams.birthDate);
       console.log($scope.sellerParams);
@@ -63,7 +63,8 @@
         params:  $scope.sellerParams
       }).then(function (resp) {
           debugger;
-          console.log("Success resp", resp)
+          console.log("Success resp", resp);
+          dialogScope.closeThisDialog();
           $state.reload();
         },
         function (result) {
@@ -77,6 +78,7 @@
     }
 
     $scope.editSeller = function (scope) {
+      $scope.entityId=scope.seller.id;
       $scope.sellerParams.firstName=scope.seller.firstName;
       $scope.sellerParams.middleName = scope.seller.middleName;
       $scope.sellerParams.lastName=scope.seller.lastName;
@@ -84,11 +86,32 @@
       $scope.sellerParams.email=scope.seller.email;
       $scope.sellerParams.deliveryAddress=scope.seller.deliveryAddress;
       ngDialog.open({
-        template: 'app/seler/addSellerDialog.html',
+        template: 'app/seler/editSellerDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
     };
+
+    $scope.editSellerOkClickHandler = function (dialogScope) {
+      debugger;
+      $scope.sellerParams.id = dialogScope.$parent.entityId;
+      $scope.sellerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.sellerParams.birthDate);
+      console.log($scope.sellerParams);
+      $http({
+        method: "POST",
+        url: "http://localhost:8080/crudGoods/rest/updateSeller",
+        params:  $scope.sellerParams
+      }).then(function (resp) {
+          debugger;
+          console.log("Success resp", resp);
+          dialogScope.closeThisDialog();
+         $state.reload();
+        },
+        function (result) {
+          debugger;
+          console.error(result, result.data);
+        });
+    }
 
     $scope.deleteSeller = function (scope) {
       var deletedId = scope.seller.id;

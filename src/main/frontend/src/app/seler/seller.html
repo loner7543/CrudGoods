@@ -1,4 +1,5 @@
 <h3>Продавцы</h3>
+<button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
 <div>
   <table class="table table-hover">
     <thead>
@@ -22,9 +23,6 @@
       <td>{{seller.email}}</td>
       <td>{{seller.deliveryAddress}}</td>
       <td>c {{seller.sale.orderDate}} по {{seller.sale.deliveryDate}}</td>
-      <td>
-        <button class="btn btn-primary" ng-click="addNewSeller()">Добавить продавца</button>
-      </td>
       <td>
         <button class="btn btn-primary" ng-click="editSeller(this)">Изменить</button>
       </td>

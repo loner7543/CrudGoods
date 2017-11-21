@@ -5,7 +5,7 @@
     .controller('SaleController', SaleController);
 
   /** @ngInject */
-  function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory,allSells) {
+  function SaleController($scope, $http,ngDialog,UtilsFunctionsFactory,allSells,$state) {
     var vm = this;
     for (var i = 0;i<allSells.data.length;i++){
       var formattedOrderDate = UtilsFunctionsFactory.toDate(allSells.data[i].orderDate);
