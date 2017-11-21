@@ -59,12 +59,18 @@ public class DiscountController {
                                 @RequestParam(value = Discount.ID_VALUE) Integer discountId,
                                 @RequestParam(value = Discount.ACTUAL_FROM_VALUE) Long newActualFromDate,
                                 @RequestParam(value = Discount.ACTUAL_TO_VALUE) Long newActualToDate,
-                                @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer newAmountDiscount){
+                                @RequestParam(value = Discount.AMOUNT_DISCOUNT_VALUE) Integer newAmountDiscount,
+                                @RequestParam(value = Discount.BUYER_ID) Integer buyerId,
+                                @RequestParam(value = Discount.PRODUCT_ID) Integer productId){
         try{
+            Product product = productService.findProductById(productId);
+            Buyer buyer = buyerService.getBuyerById(buyerId);
             Discount updated = discountService.findDiscountById(discountId);
             updated.setActualFrom(new Date(newActualFromDate));
             updated.setActualTo(new Date(newActualToDate));
             updated.setAmountDiscount(newAmountDiscount);
+            updated.setBuyer(buyer);
+            updated.setProduct(product);
             discountService.updateDiscount(updated);
             return new ResponseEntity(HttpStatus.OK);
         }

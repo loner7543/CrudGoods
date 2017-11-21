@@ -5,15 +5,14 @@
 
   /** @ngInject */
   function SellersController($scope, $http, ngDialog, UtilsFunctionsFactory, allSellers,$state) {
-    var vm = this;
 
     for (var i = 0; i < allSellers.data.length; i++) {
+      console.log(allSellers.data);
       var orderDate = UtilsFunctionsFactory.toDate(allSellers.data[i].sale.orderDate);// из продажи
       var deliveryDate = UtilsFunctionsFactory.toDate(allSellers.data[i].sale.deliveryDate);// из продажи
-      var formattedBirthDate = UtilsFunctionsFactory.toDate(allSellers.data[i].birthDate);
-      allSellers.data[i].birthDate = formattedBirthDate;
-      allSellers.data[i].sale.orderDate = orderDate;
-      allSellers.data[i].sale.deliveryDate = deliveryDate;
+      allSellers.data[i].birthDate = UtilsFunctionsFactory.toDate(allSellers.data[i].birthDate);
+      allSellers.data[i].orderDate = orderDate;// данные о продажк берутся с объекта продажа и сохраняются в качесчтве значений полей объекта "продавец"
+      allSellers.data[i].deliveryDate = deliveryDate;
     }
 
     $scope.sellers = allSellers.data;
