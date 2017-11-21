@@ -28,7 +28,7 @@
         // var formattedDate = dd+'.'+mm+'.'+yyyy;
         // return formattedDate;
         moment.locale('ru');
-        return moment(value).format('l')
+        return moment(value).format('L')
       },
 
       dateStringToMillis:function(date){

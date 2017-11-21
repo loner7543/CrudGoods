@@ -46,7 +46,7 @@
       });
     };
 
-    $scope.buyerOkClickHandler = function () {
+    $scope.buyerOkClickHandler = function (scope) {
       $scope.buyerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.buyerParams.birthDate);
       console.log($scope.buyerParams);
       $http({
@@ -55,7 +55,8 @@
         params: $scope.buyerParams
       }).then(function (resp) {
           debugger;
-          console.log("Success resp", resp)
+          console.log("Success resp", resp);
+          scope.closeThisDialog();
           $state.reload();
         },
         function (result) {

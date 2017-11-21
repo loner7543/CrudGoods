@@ -61,7 +61,7 @@
       });
     }
 
-    $scope.discountOkClickHandler = function () {
+    $scope.discountOkClickHandler = function (scope) {
       debugger;
       $scope.discountParams.actualFrom=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom);
       $scope.discountParams.actualTo=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo);
@@ -72,7 +72,8 @@
         params:  $scope.discountParams
       }).then(function (resp) {
           debugger;
-          console.log("Success resp", resp)
+          console.log("Success resp", resp);
+          scope.closeThisDialog();
           $state.reload();
         },
         function (result) {

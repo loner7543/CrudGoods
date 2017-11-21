@@ -80,7 +80,7 @@
     /*
     * Создание нового товара
     * */
-    $scope.dialogOkHandler = function () {
+    $scope.dialogOkHandler = function (dialogScope) {
       console.log( $scope.params);
       var dataObj =$scope.params;
       $http({
@@ -89,7 +89,8 @@
         params: dataObj
       }).then(function (resp) {
           debugger;
-          console.log("Success resp1", resp)
+          console.log("Success resp1", resp);
+          dialogScope.closeThisDialog();
           $state.reload();
         },
         function (result) {
