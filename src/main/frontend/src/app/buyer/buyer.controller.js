@@ -8,8 +8,7 @@
     var vm = this;
     vm.UtilsFunctionsFactory = UtilsFunctionsFactory;
     for (var i = 0;i<allBuyers.data.length;i++){
-      var formattedBirthDate = UtilsFunctionsFactory.toDate(allBuyers.data[i].birthDate);
-      allBuyers.data[i].birthDate = formattedBirthDate;
+      allBuyers.data[i].birthDate = UtilsFunctionsFactory.toDate(allBuyers.data[i].birthDate);
     }
     $scope.buyres = allBuyers.data;
     var discountMas = [];
@@ -34,12 +33,18 @@
       phoneNumber :"",
       birthDate :"",
       livingAddress:""
-    }
+    };
 
 
       // var promise = $http.get($location.protocol() + '://' + $location.host() + ':'+ $location.port() + "/crudGoods/data/buyers.json");
       //  var promise = $http.get("../../data/buyers.json");
     $scope.showBuyerDialog = function() {
+      $scope.buyerParams.firstName="";
+      $scope.buyerParams.middleName="";
+      $scope.buyerParams.lastName="";
+      $scope.buyerParams.phoneNumber="";
+      $scope.buyerParams.birthDate="";
+      $scope.buyerParams.livingAddress="";
       ngDialog.open({ template: 'app/buyer/addBuyer.html',
         className: 'ngdialog-theme-default',
         scope: $scope

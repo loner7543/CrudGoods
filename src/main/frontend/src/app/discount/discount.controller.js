@@ -24,11 +24,12 @@
       for (var i =0;i<resp.data.length;i++){
         resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
       }
+      console.log("Покупатели подгружены");
       $scope.buyers = resp.data;
     }
 
     function rejected(error) {
-      debugger;
+     console.log("Покупатели не подгружены");
       console.log(error);
     }
 
@@ -37,11 +38,12 @@
 
     function productFulfilled(resp) {
       console.log(resp.data);
+      console.log("Продукты  подгружены");
       $scope.products = resp.data;
     }
 
     function productRejected(error) {
-      debugger;
+      console.log("Продукты не подгружены");
       console.log(error);
     }
 
@@ -55,14 +57,16 @@
     };
 
     $scope.addDiscount = function() {
+      $scope.discountParams.actualFrom="";
+      $scope.discountParams.actualTo="";
+      $scope.discountParams.amountDiscount="";
       ngDialog.open({ template: 'app/discount/addDiscount.html',
         className: 'ngdialog-theme-default',
         scope: $scope
       });
-    }
+    };
 
     $scope.discountOkClickHandler = function (scope) {
-      debugger;
       $scope.discountParams.actualFrom=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom);
       $scope.discountParams.actualTo=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo);
       console.log($scope.discountParams);
@@ -71,13 +75,13 @@
         url: "http://localhost:8080/crudGoods/rest/addDiscount",
         params:  $scope.discountParams
       }).then(function (resp) {
-          debugger;
+          console.log("Скидка добавлена");
           console.log("Success resp", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Скидка не  добавлена");
           console.error(result, result.data);
         });
     }
@@ -98,7 +102,6 @@
     }
 
     $scope.editOkDiscountHandler = function (scope) {
-      debugger;
       $scope.discountParams.id = scope.$parent.entityId;
       $scope.discountParams.actualFrom=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualFrom);
       $scope.discountParams.actualTo=UtilsFunctionsFactory.dateStringToMillis($scope.discountParams.actualTo);
@@ -107,19 +110,18 @@
         url: "http://localhost:8080/crudGoods/rest/updateDiscount",
         params:  $scope.discountParams
       }).then(function (resp) {
-          debugger;
+         console.log("Скидка обновлена");
           console.log("Success resp1", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Скидка не обновлена");
           console.error(result, result.data);
         });
     }
 
     $scope.deleteDiscount = function (scope) {
-      debugger;
       var deletedId = scope.discount.id;
       $http({
         method: "DELETE",
@@ -128,15 +130,15 @@
           id:deletedId
         }
       }).then(function (resp) {
-          debugger;
-          console.log("Success resp1", resp)
+
+          console.log("Success resp1", resp);
+          console.log("Скидка удалена");
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Скидка не удалена");
           console.error(result);
         });
     }
-
   }
 })();

@@ -33,11 +33,12 @@
       for (var i =0;i<resp.data.length;i++){
         resp.data[i].birthDate = UtilsFunctionsFactory.toDate(resp.data[i].birthDate);
       }
+      console.log("Покупатели подгружены");
       $scope.salesBuyers =  resp.data;
     }
 
     function rejected(error) {
-      debugger;
+      console.log("Покупатели не подгружены");
       console.log(error);
     }
 
@@ -47,11 +48,14 @@
       deliveryDate : "",
       amountProduct:"",
       selectedBuyer:[]
-    }
+    };
     $scope.showAddDiv = false;
 
 
     $scope.addNewSale = function () {
+      $scope.saleParams.orderDate="";
+      $scope.saleParams.deliveryDate="";
+      $scope.saleParams.amountProduct="";
       ngDialog.open({ template: 'app/sale/addSaleDialog.html',
         className: 'ngdialog-theme-default',
         scope: $scope
@@ -59,7 +63,6 @@
     };
 
     $scope.dialogOkClickHandler = function (scope) {
-      debugger;
       $scope.saleParams.orderDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.orderDate);
       $scope.saleParams.deliveryDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.deliveryDate);
       $http({
@@ -67,20 +70,20 @@
         url: "http://localhost:8080/crudGoods/rest/addSale",
         params: $scope.saleParams
       }).then(function (resp) {
-          debugger;
+         console.log("Продажа добавлена");
           console.log("Success resp1", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продажа не добавлена");
           console.error(result, result.data);
         });
-    }
+    };
 
     $scope.dialogCancelHandler = function (scope) {
       scope.closeThisDialog()
-    }
+    };
 
     $scope.editSale = function (saleScope) {
       $scope.entityId=saleScope.sale.id;
@@ -91,10 +94,9 @@
         className: 'ngdialog-theme-default',
         scope: $scope
       });
-    }
+    };
 
     $scope.editSaleOkClickHandler = function (scope) {
-      debugger;
       $scope.saleParams.id = scope.$parent.entityId;
       $scope.saleParams.orderDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.orderDate);
       $scope.saleParams.deliveryDate = UtilsFunctionsFactory.dateStringToMillis($scope.saleParams.deliveryDate);
@@ -103,20 +105,20 @@
         url: "http://localhost:8080/crudGoods/rest/updateSale",
         params: $scope.saleParams
       }).then(function (resp) {
-          debugger;
+          console.log("Продажа обновлена");
           console.log("Success resp1", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продажа не обновлена");
           console.error(result, result.data);
         });
-    }
+    };
 
     $scope.deleteSale = function (scope) {
       var saleId = scope.sale.id;
-      debugger;
+      console.log(saleId);
       $http({
         method: "DELETE",
         url: "http://localhost:8080/crudGoods/rest/deleteSale",
@@ -124,12 +126,12 @@
           id:saleId
         }
       }).then(function (resp) {
-          debugger;
+          console.log("Продажа удалена");
           console.log("Success resp1", resp)
           $state.reload();
         },
         function (result) {
-          debugger;
+        console.log("Продажа не удалена");
           console.error(result, result.data);
         });
     }

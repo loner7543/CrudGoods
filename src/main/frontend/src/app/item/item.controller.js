@@ -21,8 +21,8 @@
       }
     }
 
-    $scope.discountsMas= discountMas
-    $scope.showAddDiv=false
+    $scope.discountsMas= discountMas;
+    $scope.showAddDiv=false;
 
 
     var allSales =$http.get("http://localhost:8080/crudGoods/rest/getAllSells");
@@ -52,30 +52,33 @@
     $scope.modalShown = false;
 
     $scope.addItem = function() {
+      $scope.params.name="";
+      $scope.params.unitCoast="";
+      $scope.params.unitName="";
+      $scope.params.selectedSale=0;
       ngDialog.open({ template: 'app/item/addItem.html',
        className: 'ngdialog-theme-default',
        scope: $scope
       });
-    }
+    };
 
     $scope.editOkHandler = function (scope) {
-      debugger;
       $scope.params.id = scope.$parent.entityId;
       $http({
         method: "POST",
         url: "http://localhost:8080/crudGoods/rest/updateProduct",
         params:  $scope.params
       }).then(function (resp) {
-          debugger;
           console.log("Success resp1", resp);
+          console.log("Продукт  обновлен");
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+        console.log("Продукт не обновлен");
           console.error(result, result.data);
         });
-    }
+    };
 
     /*
     * Создание нового товара
@@ -94,7 +97,7 @@
           $state.reload();
         },
         function (result) {
-          debugger;
+        console.log("Продукт не создан");
           console.error(result, result.data);
         });
     }
@@ -117,7 +120,6 @@
     };
 
     $scope.deleteProductHandler = function (scope) {
-      debugger;
       var deletedId= scope.item.id;
       console.log(deletedId);
       $http({

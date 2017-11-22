@@ -25,7 +25,7 @@
       email: "",
       deliveryAddress: "",
       saleSelect:0
-    }
+    };
 
     var allSale =$http.get("http://localhost:8080/crudGoods/rest/getAllSells");
     -      allSale.then(fulfilled, rejected);
@@ -36,15 +36,23 @@
         resp.data[i].orderDate = UtilsFunctionsFactory.toDate(resp.data[i].orderDate);
         resp.data[i].deliveryDate = UtilsFunctionsFactory.toDate(resp.data[i].deliveryDate);
       }
+      console.log("Продажи подгружены");
       $scope.sells = resp.data;
     }
 
     function rejected(error) {
-      debugger;
+      console.log("Продажи не подгружены");
       console.log(error);
     }
 
     $scope.addNewSeller = function () {
+      $scope.sellerParams.firstName="";
+      $scope.sellerParams.middleName="";
+      $scope.sellerParams.lastName="";
+      $scope.sellerParams.birthDate="";
+      $scope.sellerParams.email="";
+      $scope.sellerParams.deliveryAddress="";
+      $scope.sellerParams.saleSelect="";
       ngDialog.open({
         template: 'app/seler/addSellerDialog.html',
         className: 'ngdialog-theme-default',
@@ -53,7 +61,6 @@
     };
 
     $scope.addSellerOkHandler = function (dialogScope) {
-      debugger;
       $scope.sellerParams.birthDate = UtilsFunctionsFactory.dateStringToMillis($scope.sellerParams.birthDate);
       console.log($scope.sellerParams);
       $http({
@@ -61,16 +68,16 @@
         url: "http://localhost:8080/crudGoods/rest/addSeller",
         params:  $scope.sellerParams
       }).then(function (resp) {
-          debugger;
+          console.log("Продавец добавлен");
           console.log("Success resp", resp);
           dialogScope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продавец не добавлен");
           console.error(result, result.data);
         });
-    }
+    };
 
     $scope.addSellerCancelClickHandler = function (scope) {
       scope.closeThisDialog();
@@ -101,16 +108,16 @@
         url: "http://localhost:8080/crudGoods/rest/updateSeller",
         params:  $scope.sellerParams
       }).then(function (resp) {
-          debugger;
+          console.log("Продавец обновлен");
           console.log("Success resp", resp);
           dialogScope.closeThisDialog();
          $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продавец не обновлен");
           console.error(result, result.data);
         });
-    }
+    };
 
     $scope.deleteSeller = function (scope) {
       var deletedId = scope.seller.id;
@@ -121,12 +128,12 @@
           id:deletedId
         }
       }).then(function (resp) {
-          debugger;
+          console.log("Продавец удален");
           console.log("Success resp1", resp)
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продавец не удален");
           console.error(result);
         });
     }
