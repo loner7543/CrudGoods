@@ -59,13 +59,13 @@
         url: "http://localhost:8080/crudGoods/rest/addBuyer",
         params: $scope.buyerParams
       }).then(function (resp) {
-          debugger;
+         console.log("Покупатель добавлен");
           console.log("Success resp", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Покупатель не добавлен");
           console.error(result, result.data);
         });
     }
@@ -97,13 +97,13 @@
         url: "http://localhost:8080/crudGoods/rest/updateBuyer",
         params: $scope.buyerParams
       }).then(function (resp) {
-          debugger;
+          console.log("Покупатель обновлен");
           console.log("Success resp", resp);
           scope.closeThisDialog();
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Покупатель  не обновлен");
           console.error(result, result.data);
         });
     }
@@ -117,12 +117,12 @@
           id:buyerId
         }
       }).then(function (resp) {
-          debugger;
+          console.log("Покупатель удален");
           console.log("Success resp", resp)
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Покупатель не удален");
           console.error(result, result.data);
         });
     };

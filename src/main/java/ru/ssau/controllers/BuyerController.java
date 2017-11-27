@@ -61,15 +61,27 @@ public class BuyerController {
                          @RequestParam(value = Buyer.LIVING_ADDRESS_VALUE) String livingAddress,
                          @RequestParam(value = Buyer.PHONE_NUMBER_VALUE) String phoneNumber){
         Buyer buyer = new Buyer(firstName,middleName,lastName,new Date(birthDate),phoneNumber,livingAddress);
-        buyerService.addBuyer(buyer);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            buyerService.addBuyer(buyer);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteBuyer")
     public ResponseEntity deleteBuyer(@RequestParam(value = Buyer.ID_VALUE) Integer buyerId){
-        Buyer deleted = buyerService.getBuyerById(buyerId);
-        buyerService.removeBuyer(deleted);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Buyer deleted = buyerService.getBuyerById(buyerId);
+            buyerService.removeBuyer(deleted);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     //http://localhost:8080/crudGoods/index.html#/buyers

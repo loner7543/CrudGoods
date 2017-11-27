@@ -55,12 +55,18 @@ public class SaleController {
                                      @RequestParam(value = Sale.AMOUNT_PRODUCT_VALUE) Integer amountProduct,
                                      @RequestParam(value = Sale.ORDER_DATE_VALUE) Long orderDate,
                                      @RequestParam(value = Sale.DELIVERY_DATE_VALUE) Long deliveryDate){
-        Sale existingSale = saleService.getSaleById(saleId);
-        existingSale.setDeliveryDate(new Date(deliveryDate));
-        existingSale.setOrderDate(new Date(orderDate));
-        existingSale.setAmountProduct(amountProduct);
-        saleService.updateSale(existingSale);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Sale existingSale = saleService.getSaleById(saleId);
+            existingSale.setDeliveryDate(new Date(deliveryDate));
+            existingSale.setOrderDate(new Date(orderDate));
+            existingSale.setAmountProduct(amountProduct);
+            saleService.updateSale(existingSale);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSale")

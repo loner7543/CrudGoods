@@ -9,7 +9,7 @@
   <div class="hideScroll">
     <select name="saleSelect" ng-model="discountParams.selectedBuyer" class="textField">
       <option ng-repeat="option in buyers"
-              ng-value="option.id" class="panel panel-primary"> {{option.firstName}}</option>
+                      ng-value="option.id" class="panel panel-primary"> {{option.firstName}} {{option.middleName}} {{option.lastName}}</option>
     </select>
   </div><br>
 

@@ -36,10 +36,16 @@ public class SellerController {
                           @RequestParam(value = Seller.EMAIL_VALUE) String email,
                           @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress,
                                     @RequestParam(value = Seller.SALE_ID) Integer saleId){
-        Sale sale = saleService.getSaleById(saleId);
-        Seller seller = new Seller(firstName,middleName,lastName,new Date(birthDate),email,deliveryAddress,sale);
-        sellerService.addSeller(seller);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Sale sale = saleService.getSaleById(saleId);
+            Seller seller = new Seller(firstName,middleName,lastName,new Date(birthDate),email,deliveryAddress,sale);
+            sellerService.addSeller(seller);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateSeller")
@@ -51,23 +57,35 @@ public class SellerController {
                              @RequestParam(value = Seller.EMAIL_VALUE) String email,
                              @RequestParam(value = Seller.DELIVERY_ADDRESS_VALUE) String deliveryAddress,
                                        @RequestParam(value = Seller.SALE_ID) Integer saleId){
-        Seller updatedSeller = sellerService.getSellerById(id);
-        Sale selectedSale = saleService.getSaleById(saleId);
-        updatedSeller.setFirstName(firstName);
-        updatedSeller.setLastName(lastName);
-        updatedSeller.setMiddleName(middleName);
-        updatedSeller.setBirthDate(new Date(birthDate));
-        updatedSeller.setEmail(email);
-        updatedSeller.setDeliveryAddress(deliveryAddress);
-        updatedSeller.setSale(selectedSale);
-        sellerService.updateSeller(updatedSeller);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Seller updatedSeller = sellerService.getSellerById(id);
+            Sale selectedSale = saleService.getSaleById(saleId);
+            updatedSeller.setFirstName(firstName);
+            updatedSeller.setLastName(lastName);
+            updatedSeller.setMiddleName(middleName);
+            updatedSeller.setBirthDate(new Date(birthDate));
+            updatedSeller.setEmail(email);
+            updatedSeller.setDeliveryAddress(deliveryAddress);
+            updatedSeller.setSale(selectedSale);
+            sellerService.updateSeller(updatedSeller);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteSeller")
     public ResponseEntity deleteSeller(@RequestParam(value = Seller.ID_VALUE) Integer sellerId){
-        Seller deleted = sellerService.getSellerById(sellerId);
-        sellerService.deleteSeller(deleted);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Seller deleted = sellerService.getSellerById(sellerId);
+            sellerService.deleteSeller(deleted);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

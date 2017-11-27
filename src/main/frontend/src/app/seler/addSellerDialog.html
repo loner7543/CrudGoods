@@ -15,7 +15,7 @@
 
   <select name="saleSelect" ng-model="sellerParams.saleSelect" class="textField">
     <option ng-repeat="option in sells"
-            ng-value="option.id" class="panel panel-primary">Заказана  {{option.orderDate}}</option>
+            ng-value="option.id" class="panel panel-primary">Товар заказан  {{option.orderDate}} в колличестве {{option.amountProduct}} единиц</option>
   </select><br>
 
   <button class="btn btn-primary" ng-click="addSellerOkHandler(this)">Добавить</button>

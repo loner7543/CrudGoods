@@ -36,10 +36,16 @@ public class ProductController {
             @RequestParam(value = Product.UNIT_COAST_VALUE) Integer unitCoast,
             @RequestParam(value = Product.UNIT_NAME_VALUE) String unitName,
             @RequestParam(value = Product.SALE_ID) Integer saleId ){
-        Sale sale = saleService.getSaleById(saleId);
-        Product product = new Product(productName,unitCoast,unitName,sale);
-        productService.saveProducr(product);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Sale sale = saleService.getSaleById(saleId);
+            Product product = new Product(productName,unitCoast,unitName,sale);
+            productService.saveProducr(product);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/updateProduct")
@@ -56,7 +62,7 @@ public class ProductController {
                     productService.update(updatedProduct);
                 }
                 catch (Exception e){
-                    return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+                    return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
         return new ResponseEntity(HttpStatus.OK);
@@ -64,8 +70,14 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/removeProduct")
     public ResponseEntity deleteProduct( @RequestParam(value = Product.ID_VALUE) Integer productId){
-        Product product = productService.findProductById(productId);
-        productService.delete(product);
-        return new ResponseEntity(HttpStatus.OK);
+        try{
+            Product product = productService.findProductById(productId);
+            productService.delete(product);
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

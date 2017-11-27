@@ -35,10 +35,11 @@
         resp.data[i].deliveryDate = UtilsFunctionsFactory.toDate(resp.data[i].deliveryDate);
       }
       $scope.sells = resp.data;
+      console.log("Продажи подгружены");
     }
 
     function rejected(error) {
-      debugger;
+      console.log("Продажи не подгружены");
       console.log(error);
     }
 
@@ -91,7 +92,7 @@
         url: "http://localhost:8080/crudGoods/rest/saveProduct",
         params: dataObj
       }).then(function (resp) {
-          debugger;
+        console.log("Продукт сохранен");
           console.log("Success resp1", resp);
           dialogScope.closeThisDialog();
           $state.reload();
@@ -129,12 +130,12 @@
           id:deletedId
         }
       }).then(function (resp) {
-          debugger;
-          console.log("Success resp1", resp)
+          console.log("Продукт удален");
+          console.log("Success resp1", resp);
           $state.reload();
         },
         function (result) {
-          debugger;
+          console.log("Продукт  не удален");
           console.error(result);
         });
     }

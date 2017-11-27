@@ -123,16 +123,18 @@
       var deletedId = scope.seller.id;
       $http({
         method: "DELETE",
-        url: "http://localhost:8080/crudGoods/rest/deleteDiscount",
+        url: "http://localhost:8080/crudGoods/rest/deleteSeller",
         params: {
           id:deletedId
         }
       }).then(function (resp) {
+        debugger;
           console.log("Продавец удален");
-          console.log("Success resp1", resp)
+          console.log("Success resp1", resp);
           $state.reload();
         },
         function (result) {
+        debugger;
           console.log("Продавец не удален");
           console.error(result);
         });

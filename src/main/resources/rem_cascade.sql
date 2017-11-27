@@ -116,5 +116,71 @@ OIDS=FALSE
 ALTER TABLE seller
   OWNER TO postgres;
 
+  -- Sequence: buyersequence
+
+-- DROP SEQUENCE buyersequence;
+
+CREATE SEQUENCE buyersequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 9
+  CACHE 1;
+ALTER TABLE buyersequence
+  OWNER TO postgres;
+
+
+-- Sequence: discountsequence
+
+-- DROP SEQUENCE discountsequence;
+
+CREATE SEQUENCE discountsequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 23
+  CACHE 1;
+ALTER TABLE discountsequence
+  OWNER TO postgres;
+
+
+-- Sequence: productsequence
+
+-- DROP SEQUENCE productsequence;
+
+CREATE SEQUENCE productsequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 45
+  CACHE 1;
+ALTER TABLE productsequence
+  OWNER TO postgres;
+
+
+-- Sequence: salesequence
+
+-- DROP SEQUENCE salesequence;
+
+CREATE SEQUENCE salesequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 11
+  CACHE 1;
+ALTER TABLE salesequence
+  OWNER TO postgres;
+-- Sequence: selersequence
+
+-- DROP SEQUENCE selersequence;
+
+CREATE SEQUENCE selersequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 5
+  CACHE 1;
+ALTER TABLE selersequence
+  OWNER TO postgres;
 
 
