@@ -1,7 +1,5 @@
-package service;
+package repository.impl;
 
-import model.Product;
-import model.Sale;
 import model.Seller;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class SellerService {
+public class SellerRepositoryImpl {
 
     @PersistenceContext
     private EntityManager entityManager;

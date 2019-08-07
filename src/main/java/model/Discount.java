@@ -19,24 +19,6 @@ public class Discount implements Serializable {
 
     private static final long serialVersionUID = -2952730516290458737L;
 
-    @Transient
-    public static final String ID_VALUE = "id";
-
-    @Transient
-    public static final String ACTUAL_FROM_VALUE = "actualFrom";
-
-    @Transient
-    public static final String ACTUAL_TO_VALUE = "actualTo";
-
-    @Transient
-    public static final String AMOUNT_DISCOUNT_VALUE = "amountDiscount";
-
-    @Transient
-    public static final String BUYER_ID = "selectedBuyer";
-
-    @Transient
-    public static final String PRODUCT_ID = "selectedProduct";
-
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")

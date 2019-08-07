@@ -1,4 +1,4 @@
-package service;
+package repository.impl;
 
 import model.Sale;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class SaleService {
+public class SaleRepositoryImpl {
     @PersistenceContext
     private EntityManager entityManager;
 

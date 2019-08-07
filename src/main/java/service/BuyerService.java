@@ -1,48 +1,18 @@
 package service;
 
 import model.Buyer;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Repository
-public class BuyerService {
+public interface BuyerService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    List<Buyer> getAllI();
 
-    @Transactional
-    public List<Buyer> getAll(){//++
-        String query = "from Buyer order by id";
-        TypedQuery<Buyer> typedQuery = entityManager.createQuery(query, Buyer.class);
-        List<Buyer> buyers = typedQuery.getResultList();
-        buyers.forEach( elm -> {
-            elm.getDiscounts().size();
-        });
-        return buyers;
-    }
+    void addBuyer(Buyer buyer);
 
-    @Transactional
-    public void addBuyer(Buyer buyer){
-        entityManager.persist(buyer);
-    }
+    void updateBuyer(Buyer buyer);
 
-    @Transactional
-    public void updateBuyer(Buyer newBuyer){
-        entityManager.merge(newBuyer);
-    }
+    Buyer getBuyerById(Integer id);
 
-    @Transactional
-    public Buyer getBuyerById(int id){
-        return entityManager.find(Buyer.class,id);
-    }
-
-    @Transactional
-    public void removeBuyer(Buyer buyer){
-        entityManager.remove(entityManager.contains(buyer) ? buyer : entityManager.merge(buyer));
-    }
+    void removeBuyer(Buyer buyer);
 }

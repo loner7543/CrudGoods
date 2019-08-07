@@ -15,27 +15,6 @@ public class Buyer implements Serializable {
 
     private static final long serialVersionUID = -4665355705722204062L;
 
-    @Transient
-    public static final String ID_VALUE = "id";
-
-    @Transient
-    public static final String FIRST_NAME_VALUE = "firstName";
-
-    @Transient
-    public static final String MIDDLE_NAME_VALUE = "middleName";
-
-    @Transient
-    public static final String LAST_NAME_VALUE = "lastName";
-
-    @Transient
-    public static final String BIRTH_DATE_VALUE = "birthDate";
-
-    @Transient
-    public static final String PHONE_NUMBER_VALUE = "phoneNumber";
-
-    @Transient
-    public static final String LIVING_ADDRESS_VALUE = "livingAddress";
-
     @Id
     @GeneratedValue(generator = "SEQ_ID")
     @Column(name = "id")

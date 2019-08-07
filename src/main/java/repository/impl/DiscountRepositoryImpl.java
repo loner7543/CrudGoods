@@ -1,7 +1,6 @@
-package service;
+package repository.impl;
 
 import model.Discount;
-import model.Product;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,12 +11,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class DiscountService {
+public class DiscountRepositoryImpl {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public DiscountService(){
+    public DiscountRepositoryImpl(){
 
     }
 
@@ -30,7 +29,7 @@ public class DiscountService {
     }
 
     @Transactional
-    public void addDiscount(Discount discount) throws Exception{
+    public void addDiscount(Discount discount){
         entityManager.merge(discount);
     }
 
