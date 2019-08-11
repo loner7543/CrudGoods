@@ -21,21 +21,21 @@ public class BuyerServiceImpl implements BuyerService {
 
     @Override
     public void addBuyer(Buyer buyer) {
-
+        buyerRepository.addBuyer(buyer);
     }
 
     @Override
     public void updateBuyer(Buyer buyer) {
-
+        buyerRepository.updateBuyer(buyer);
     }
 
     @Override
     public Buyer getBuyerById(Integer id) {
-        return null;
+        return buyerRepository.getBuyerById(id);
     }
 
     @Override
     public void removeBuyer(Buyer buyer) {
-
+        buyerRepository.removeBuyer(buyer);
     }
 }

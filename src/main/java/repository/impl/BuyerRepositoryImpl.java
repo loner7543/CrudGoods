@@ -36,7 +36,7 @@ public class BuyerRepositoryImpl implements BuyerRepository {
         entityManager.merge(newBuyer);
     }
 
-    public Buyer getBuyerById(int id){
+    public Buyer getBuyerById(Integer id){
         return entityManager.find(Buyer.class,id);
     }
 

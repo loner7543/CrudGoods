@@ -3,6 +3,7 @@ package repository.impl;
 import model.Product;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import repository.ProductRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +11,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class ProductRepositoryIImpl {
+@Transactional
+public class ProductRepositoryIImpl implements ProductRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -26,7 +28,6 @@ public class ProductRepositoryIImpl {
         this.entityManager = entityManager;
     }
 
-    @Transactional
     public List<Product> getAll(){//++
         String query = "from Product order by id";
         TypedQuery<Product> typedQuery = entityManager.createQuery(query, Product.class);
@@ -37,27 +38,22 @@ public class ProductRepositoryIImpl {
         return resultList;
     }
 
-    @Transactional
-    public void saveProducr(Product product){
+    public void saveProduct(Product product){
         entityManager.persist(product);
     }
 
-    @Transactional
     public void removeProduct(Product product){
         entityManager.remove(product);
     }
 
-    @Transactional
-    public Product findProductById(int id){
+    public Product findProductById(Integer id){
         return entityManager.find(Product.class,id);
     }
 
-    @Transactional
     public void update(Product product){
         entityManager.merge(product);
     }
 
-    @Transactional
     public void delete(Product product){
         entityManager.remove(entityManager.contains(product) ? product : entityManager.merge(product));
     }

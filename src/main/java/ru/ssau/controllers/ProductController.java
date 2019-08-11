@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import repository.impl.ProductRepositoryIImpl;
 import repository.impl.SaleRepositoryImpl;
+import service.ProductService;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductRepositoryIImpl productService;
+    private ProductService productService;
 
     @Autowired
     private SaleRepositoryImpl saleService;
@@ -30,17 +31,16 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.POST)
     public void saveProduct(@RequestBody Product product) {
         Sale sale = saleService.getSaleById(product.getSale().getId());
-        productService.saveProducr(product);
+        productService.saveProduct(product);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     public void updateProduct(@RequestBody Product product) {
         productService.update(product);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteProduct(@RequestParam(value = "id") Integer productId) {
-        Product product = productService.findProductById(productId);
-        productService.delete(product);
+        productService.delete(productId);
     }
 }

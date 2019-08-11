@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import repository.impl.BuyerRepositoryImpl;
 import repository.impl.SaleRepositoryImpl;
+import service.SaleService;
+import service.SellerService;
 
 import java.util.Date;
 import java.util.List;
@@ -19,13 +21,13 @@ public class SaleController {
     private static final Logger logger = LoggerFactory.getLogger(SaleController.class);
 
     @Autowired
-    private SaleRepositoryImpl saleService;
+    private SaleService saleService;
 
     @Autowired
     private BuyerRepositoryImpl buyerService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public   List<Sale> getAllSells(){
+    public List<Sale> getAllSells() {
         return saleService.getAllSells();
     }
 
@@ -37,17 +39,15 @@ public class SaleController {
         saleService.addSale(sale);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity updateSale(@RequestBody Sale sale){
-            saleService.updateSale(sale);
-            return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateSale(@RequestBody Sale sale) {
+        saleService.updateSale(sale);
 
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteSale(@RequestParam(value = "id") Integer saleId){
-            Sale deletedSale = saleService.getSaleById(saleId);
-            saleService.deleteSale(deletedSale);
+    public void deleteSale(@RequestParam(value = "id") Integer saleId) {
+        saleService.deleteSale(saleId);
     }
 
 }

@@ -3,6 +3,7 @@ package repository.impl;
 import model.Sale;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import repository.SaleRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,11 +11,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class SaleRepositoryImpl {
+@Transactional
+public class SaleRepositoryImpl implements SaleRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     public List<Sale> getAllSells(){
         String query = "from Sale order by id";
         TypedQuery<Sale> typedQuery = entityManager.createQuery(query, Sale.class);
@@ -27,26 +29,27 @@ public class SaleRepositoryImpl {
         return sales;
     }
 
-    @Transactional
     public void addSale(Sale sale){
         entityManager.merge(sale);
     }
 
-    @Transactional
     public void updateSale(Sale sale){
         entityManager.merge(sale);
     }
 
-    @Transactional
     public Sale getSaleById(int id) {
         return entityManager.find(Sale.class,id);
     }
 
-    @Transactional
-    public void deleteSale(Sale sale){
+    public void deleteSale(Integer id){
+        Sale sale = find(id);
         entityManager.remove(entityManager.contains(sale) ? sale : entityManager.merge(sale));
     }
 
+    @Override
+    public Sale find(Integer id) {
+        return entityManager.find(Sale.class,id);
+    }
 
 
 }
