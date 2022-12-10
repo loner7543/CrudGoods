@@ -10,7 +10,7 @@
     <!--<url>http://localhost:8080</url>-->
 
     <properties>
-        <spring.version>4.3.4.RELEASE</spring.version>
+        <spring.version>6.0.0</spring.version>
         <hibernate.version>4.3.0.Final</hibernate.version>
         <fasterxml.version>2.9.1</fasterxml.version>
         <org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
